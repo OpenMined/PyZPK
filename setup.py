@@ -1,7 +1,6 @@
 import os
 from setuptools import find_packages
 from setuptools import setup
-
 #reads a file
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -29,6 +28,10 @@ setup(
     name='pyzpk',
     long_description=long_description,
     packages=find_packages(),
+    version = '0.1',
+    author='',
+    url='https://github.com/Benardi/PyZPK',
+    download_url='https://github.com/Benardi/PyZPK/archive/master.zip',
     install_requires=core_reqs,
     dependency_links=core_dependency_links,
     setup_requires=["pbr"]
