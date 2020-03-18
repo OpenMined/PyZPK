@@ -2,3 +2,5 @@ pytest>=4.5.0
 setuptools>=39.0.0
 bandit
 coverage>=4.5.3
+torch>=1.4.0
+numpy>=1.18.2

@@ -1,1 +1,1 @@
-from pyzpk.main import dummy_func
+from pyzpk.main import sum

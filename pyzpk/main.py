@@ -1,4 +1,5 @@
-# dummy function with one argument
-def dummy_func(arg1):
+import torch
+
+def sum(x,y):
     
-    return arg1>0
+    return torch.add(x, y)
