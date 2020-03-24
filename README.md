@@ -16,12 +16,10 @@ git submodule update
 git submodule foreach --recursive git reset --hard
 
 ## Build libsnark
-Uncomment build.sh depending on your type of OS
 
-## Building
 In Linux 
 ./build.sh
 
 In MacOS
-sh build.sh
+sh build_MacOS.sh
 
