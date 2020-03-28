@@ -6,20 +6,14 @@
 
 Python wrapper for open source Zero Proof Knowledge Library
 
-## Initialization of libsnark
-git submodule init
-
-## Update libsnark in order to pull down the files.
-git submodule update
-
-## Reset all submodules
-git submodule foreach --recursive git reset --hard
 
 ## Build libsnark
 
-In Linux 
-./build.sh
+In Linux
+
+    $ bash build.sh
 
 In MacOS
-sh build_MacOS.sh
+
+    bash build_MacOS.sh
 
