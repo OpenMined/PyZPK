@@ -1,11 +1,13 @@
 import os
 from setuptools import find_packages
 from setuptools import setup
-#reads a file
+
+# reads a file
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-#get the requirements from text file "requirements.txt"
+
+# get the requirements from text file "requirements.txt"
 def get_requirements(req_file):
     """Read requirements file and return packages and git repos separately"""
     requirements = []
@@ -20,19 +22,21 @@ def get_requirements(req_file):
 
 
 REQ_DIR = os.path.dirname(os.path.abspath(__file__))
-core_reqs, core_dependency_links = get_requirements(os.path.join(REQ_DIR, "requirements.txt"))
+core_reqs, core_dependency_links = get_requirements(
+    os.path.join(REQ_DIR, "requirements.txt")
+)
 long_description = read("README.md")
 
 
 setup(
-    name='pyzpk',
+    name="pyzpk",
     long_description=long_description,
     packages=find_packages(),
-    version = '0.1',
-    author='',
-    url='https://github.com/Benardi/PyZPK',
-    download_url='https://github.com/Benardi/PyZPK/archive/master.zip',
+    version="0.1",
+    author="",
+    url="https://github.com/Benardi/PyZPK",
+    download_url="https://github.com/Benardi/PyZPK/archive/master.zip",
     install_requires=core_reqs,
     dependency_links=core_dependency_links,
-    setup_requires=["pbr"]
+    setup_requires=["pbr"],
 )

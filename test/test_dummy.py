@@ -15,5 +15,5 @@ class TestSum(unittest.TestCase):
         self.assertEqual(result, [5.0, 6.0])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

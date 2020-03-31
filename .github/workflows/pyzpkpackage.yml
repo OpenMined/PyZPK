@@ -11,9 +11,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ 'ubuntu-latest', 'macos-latest']
         python-version: [3.5, 3.6, 3.7]
 
     steps:
@@ -24,12 +25,26 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          python -m pip install --upgrade pip
-          hash -r
-          pip3 install -r requirements.txt
-          pip3 install -r requirements_dev.txt
-          python setup.py install
+          if [ ${{ matrix.os }} == ubuntu-latest ]
+          then
+              sudo apt-get update
+              python -m pip install --upgrade pip
+              hash -r
+              pip3 install -r requirements.txt
+              pip3 install -r requirements_dev.txt
+              python3 setup.py install
+          elif [ ${{ matrix.os }} == macos-latest ]
+          then
+              brew update
+              python -m pip install --upgrade pip
+              hash -r
+              pip3 install -r requirements.txt
+              pip3 install -r requirements_dev.txt
+              python3 setup.py install
+          else
+              exit 1
+          fi
+        shell: bash
       - name: Lint, format, and type-check
         run: |
           pip install flake8
@@ -40,8 +55,17 @@ jobs:
           flake8 test
       - name: Building Library
         run: |
-          chmod 557 build.sh
-          ./build.sh
+          if [ ${{ matrix.os }} == ubuntu-latest ]
+          then
+              chmod 557 build.sh
+              ./build.sh
+          elif [ ${{ matrix.os }} == macos-latest ]
+          then
+              chmod 557 build_MacOS.sh
+              ./build_MacOS.sh
+          else
+              exit 1
+          fi
       - name: Scan for security issues
         run: |
           bandit -r syft -ll

@@ -1,12 +1,13 @@
 #!/bin/bash
 
-# Updating libboost to run the cmake (requirement) 
+# Updating libboost to run the cmake (requirement)
 sudo apt-get install libboost-all-dev
-# Updating libprocps to run the cmake (requirement) 
+# Updating libprocps to run the cmake (requirement)
 sudo apt-get install libprocps-dev
 
 rm -r libsnark
-#Initialization of libsnark
+#Sync & Initialization of libsnark
+git submodule sync
 git submodule init
 # Update libsnark in order to pull down the files.
 git submodule update --init --recursive
@@ -21,4 +22,3 @@ cd build
 cmake ..
 
 make
-
