@@ -5,10 +5,11 @@ brew list cmake || brew install cmake
 brew list gmp || brew install gmp
 brew list boost || brew install boost
 brew list gcc || brew install gcc
-bre list pkg-config || brew install pkg-config
+brew list pkg-config || brew install pkg-config
 
 # Removing old directory
-rm -rf libsnark
+rm -rf third_party/libsnark
+rm -rf third_party/pybind11
 
 #Sync & Initialization of libsnark
 git submodule sync
@@ -19,7 +20,7 @@ git submodule intit
 # Reset all submodules
 git submodule foreach --recursive git reset --hard
 
-cd libsnark
+cd third_party/libsnark
 mkdir build
 cd build
 
@@ -34,5 +35,13 @@ LDFLAGS=-L/usr/local/opt/openssl/lib
 PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 cmake -DWITH_PROCPS=OFF -DWITH_SUPERCOP=OFF ..
 
+
+make
+
+cd ../../..
+mkdir build
+cd build
+
+cmake ..
 
 make

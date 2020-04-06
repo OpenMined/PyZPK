@@ -1,3 +1,6 @@
-[submodule "libsnark"]
-	path = libsnark
+[submodule "third_party/pybind11"]
+	path = third_party/pybind11
+	url = https://github.com/pybind/pybind11.git
+[submodule "third_party/libsnark"]
+	path = third_party/libsnark
 	url = https://github.com/scipr-lab/libsnark.git

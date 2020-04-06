@@ -5,7 +5,8 @@ sudo apt-get install libboost-all-dev
 # Updating libprocps to run the cmake (requirement)
 sudo apt-get install libprocps-dev
 
-rm -r libsnark
+rm -r third_party/libsnark
+rm -r third_party/pybind11
 #Sync & Initialization of libsnark
 git submodule sync
 git submodule init
@@ -15,7 +16,15 @@ git submodule update --init --recursive
 git submodule foreach --recursive git reset --hard
 
 
-cd libsnark
+cd third_party/libsnark
+mkdir build
+cd build
+
+cmake ..
+
+make
+
+cd ../../..
 mkdir build
 cd build
 
