@@ -87,3 +87,12 @@ After each commit GitHub Actions will check your new code against the formatting
 We will only merge PRs that pass the GitHub Actions checks.
 
 If your check fails don't worry you will still be able to make changes and make your code pass the checks.
+
+## Docker Support
+
+Dockerfile is added so users on all systems can get involved in development. Windows developers can start contrbiuting with the help of Docker support.
+
+To build the image: ``` docker build -t pyzpk:test . ```
+To run the image: ``` docker run --rm -it pyzpk:test ```
+
+To run the code, you can open python interpretor inside the container by typing ```python3```. 
