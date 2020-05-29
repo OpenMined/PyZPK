@@ -10,6 +10,8 @@ Python wrapper for open source Zero Proof Knowledge Library
 ## Build libsnark
 
 In Linux
+    
+    $ bash ext_source_setup.sh
 
     $ bash build.sh
 

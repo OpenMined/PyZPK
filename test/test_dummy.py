@@ -1,7 +1,7 @@
 import unittest
 import torch
 
-from pyzpk import sum
+from _pyzpk import sum
 
 
 class TestSum(unittest.TestCase):

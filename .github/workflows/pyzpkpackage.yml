@@ -11,10 +11,9 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ 'ubuntu-latest', 'macos-latest']
         python-version: [3.5, 3.6, 3.7]
 
     steps:
@@ -25,47 +24,28 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          if [ ${{ matrix.os }} == ubuntu-latest ]
-          then
-              sudo apt-get update
-              python -m pip install --upgrade pip
-              hash -r
-              pip3 install -r requirements.txt
-              pip3 install -r requirements_dev.txt
-              python3 setup.py install
-          elif [ ${{ matrix.os }} == macos-latest ]
-          then
-              brew update
-              python -m pip install --upgrade pip
-              hash -r
-              pip3 install -r requirements.txt
-              pip3 install -r requirements_dev.txt
-              python3 setup.py install
-          else
-              exit 1
-          fi
-        shell: bash
+          sudo apt-get update
+          python -m pip install --upgrade pip
+          hash -r
+          pip3 install -r requirements.txt
+          pip3 install -r requirements_dev.txt
+          chmod 557 ext_source_setup.sh
+          ./ext_source_setup.sh
+          python3 setup.py install
       - name: Lint, format, and type-check
         run: |
-          pip install flake8
+          pip3 install flake8
+          # ignore third_party type-check
           # stop the build if there are Python syntax errors or undefined names
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          flake8 . --exclude third_party \
+          --count --select=E9,F63,F7,F82 --show-source --statistics \
+          --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
           flake8 test
       - name: Building Library
         run: |
-          if [ ${{ matrix.os }} == ubuntu-latest ]
-          then
-              chmod 557 build.sh
-              ./build.sh
-          elif [ ${{ matrix.os }} == macos-latest ]
-          then
-              chmod 557 build_MacOS.sh
-              ./build_MacOS.sh
-          else
-              exit 1
-          fi
+          chmod 557 build.sh
+          ./build.sh
       - name: Scan for security issues
         run: |
           bandit -r syft -ll
