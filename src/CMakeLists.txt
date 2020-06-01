@@ -1,4 +1,14 @@
-add_library(pyzpk SHARED PyZPK/main.cpp)
+set(
+  SRC
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
+)
+
+include_directories(BEFORE ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
+
+pybind11_add_module(pyzpk ${SRC})
+set_target_properties(pyzpk PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED TRUE)
+set_target_properties(snark PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_link_libraries(pyzpk PRIVATE snark)
 
 target_include_directories(
   pyzpk

@@ -1,9 +1,6 @@
 cmake_minimum_required( VERSION 3.10.2 )
 project(PyZPK)
 
-# set(CMAKE_CXX_STANDARD 17)
-# set(CMAKE_CXX_STANDARD_REQUIRED True)
-
 
 # The set instruction sets environment variables
 # Note: If this environment variable already exist in the cache, it is shadowed by the set value here
@@ -107,6 +104,5 @@ else()
     add_definitions(-DNO_PROCPS)
 endif()
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_subdirectory(third_party)
 add_subdirectory(src)
