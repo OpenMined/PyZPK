@@ -11,6 +11,8 @@
 #include <libsnark/common/data_structures/set_commitment.hpp>
 #include <libsnark/common/routing_algorithms/benes_routing_algorithm.cpp>
 #include <libsnark/common/routing_algorithms/as_waksman_routing_algorithm.cpp>
+#include <libsnark/common/default_types/r1cs_ppzkpcd_pp.hpp>
+#include <libsnark/common/default_types/tinyram_ppzksnark_pp.hpp>
 using namespace std;
 using namespace libsnark;
 namespace py = pybind11;
@@ -114,4 +116,13 @@ PYBIND11_MODULE(pyzpk, m)
     )pbdoc", py::arg("left"), py::arg("right"), py::arg("lo"), py::arg("hi"), py::arg("permutation"), py::arg("permutation_inv"), py::arg("routing"));
     m.def("get_as_waksman_routing", &get_as_waksman_routing, py::arg("permutation"));
     m.def("valid_as_waksman_routing", &valid_as_waksman_routing, py::arg("permutation"), py::arg("routing"));
+
+    
+    // Binding for #include common/default_types/r1cs_ppzkpcd_pp.hpp
+    py::class_<default_r1cs_ppzkpcd_pp>(m, "default_r1cs_ppzkpcd_pp")
+        .def_static("init_public_params", &default_r1cs_ppzkpcd_pp::init_public_params);
+    
+    // Binding for #include common/default_types/tinyram_ppzksnark_pp.hpp
+    py::class_<default_tinyram_ppzksnark_pp>(m, "default_tinyram_ppzksnark_pp")
+        .def_static("init_public_params", &default_tinyram_ppzksnark_pp::init_public_params);
 }

@@ -47,9 +47,14 @@ jobs:
         flake8 . --exclude third_party \
           --count --select=E9,F63,F7,F82 --show-source --statistics \
           --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Building Library
+      run: |
+        chmod 557 build.sh
+        ./build.sh
     - name: Scan for security issues
       run: |
             bandit -r syft -ll
     - name: Run tests
       run: |
+        cp build/src/*.so test
         coverage run -m pytest test
