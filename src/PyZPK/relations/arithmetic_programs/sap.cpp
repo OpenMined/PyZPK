@@ -8,15 +8,16 @@
 #include <libff/common/utils.hpp>
 #include <libfqfft/evaluation_domain/evaluation_domain.hpp>
 #include <libsnark/relations/arithmetic_programs/sap/sap.hpp>
-#define FieldT libff::Fr<libff::mnt6_pp>
 
 using namespace std;
 namespace py = pybind11;
 using namespace libsnark;
+using namespace libff;
 
 // Implementation of interfaces for a SAP ("Square Arithmetic Program").
 void init_relations_arithmetic_programs_sap(py::module &m)
 {
+    using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
     // A SAP instance.
     py::class_<sap_instance<FieldT>>(m, "sap_instance")
         .def(py::init<const std::shared_ptr<libfqfft::evaluation_domain<FieldT>> &,
