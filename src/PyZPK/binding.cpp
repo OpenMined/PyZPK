@@ -10,14 +10,17 @@ void init_default_types_r1cs_ppzkpcd_pp(py::module &);
 void init_default_types_tinyram_ppzksnark_pp(py::module &);
 void init_relations_constraint_satisfaction_problems_r1cs(py::module &);
 void init_relations_constraint_satisfaction_problems_r1cs_examples(py::module &);
+void init_relations_constraint_satisfaction_problems_uscs(py::module &);
+void init_relations_constraint_satisfaction_problems_uscs_examples(py::module &);
 void init_relations_arithmetic_programs_qap(py::module &);
 void init_relations_arithmetic_programs_sap(py::module &);
+void init_relations_arithmetic_programs_ssp(py::module &);
 void init_reductions_r1cs_to_qap(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
     m.doc() = "Python wrapper for open source Zero Proof Knowledge Library";
-    
+
     init_utils_Fp_model(m);
     init_data_structures_integer_permutation(m);
     init_data_structures_set_commitment(m);
@@ -27,7 +30,10 @@ PYBIND11_MODULE(pyzpk, m)
     init_default_types_tinyram_ppzksnark_pp(m);
     init_relations_constraint_satisfaction_problems_r1cs(m);
     init_relations_constraint_satisfaction_problems_r1cs_examples(m);
+    init_relations_constraint_satisfaction_problems_uscs(m);
+    init_relations_constraint_satisfaction_problems_uscs_examples(m);
     init_relations_arithmetic_programs_qap(m);
     init_relations_arithmetic_programs_sap(m);
+    init_relations_arithmetic_programs_ssp(m);
     init_reductions_r1cs_to_qap(m);
 }

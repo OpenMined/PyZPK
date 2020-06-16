@@ -9,8 +9,11 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/default_types/tinyram_ppzksnark_pp.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/constraint_satisfaction_problems/r1cs/r1cs.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/constraint_satisfaction_problems/r1cs/r1cs_examples.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/constraint_satisfaction_problems/uscs/uscs.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/constraint_satisfaction_problems/uscs/uscs_examples.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/qap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/sap.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/ssp.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/reductions/r1cs_to_qap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )

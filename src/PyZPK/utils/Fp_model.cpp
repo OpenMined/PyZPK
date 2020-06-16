@@ -3,6 +3,7 @@
 #include <pybind11/stl_bind.h>
 #include <pybind11/cast.h>
 #include <pybind11/complex.h>
+#include <pybind11/operators.h>
 #include <vector>
 #include <cassert>
 #include <cmath>
@@ -38,11 +39,9 @@ void init_utils_Fp_model(py::module &m)
     py::class_<bigint<5l>>(m, "bigint")
         .def(py::init<>())
         .def(py::init<const unsigned long>())
-        .def(py::init<const char*>())
+        .def(py::init<const char *>())
         .def("test_bit", &bigint<5l>::test_bit)
         .def("randomize", &bigint<5l>::randomize);
-
-    py::class_<mnt6_pp>(m, "mnt6_pp");
 
     //  Implementation of arithmetic in the finite field F[p], for prime p of fixed length.
     py::class_<Fp_model<5l, libff::mnt46_modulus_B>>(m, "Fp_model")
@@ -50,7 +49,22 @@ void init_utils_Fp_model(py::module &m)
         .def(py::init<const bigint<5l> &>())
         .def(py::init<const long, const bool>())
         .def_readwrite("mont_repr", &Fp_model<5l, libff::mnt46_modulus_B>::mont_repr)
-        .def("random_element", &Fp_model<5l, libff::mnt46_modulus_B>::random_element) // Todo
+        // .def_static("random_element", &Fp_model<5l, libff::mnt46_modulus_B>::random_element) // Todo
+        .def_static("random_element", []() {
+            Fp_model<5l, mnt46_modulus_B> r;
+            while (mpn_cmp(r.mont_repr.data, mnt46_modulus_B.data, 5l))
+            {
+                size_t bitno = GMP_NUMB_BITS * 5 - 1;
+                while (mnt46_modulus_B.test_bit(bitno) == false)
+                {
+                    const size_t part = bitno / GMP_NUMB_BITS;
+                    const size_t bit = bitno - (GMP_NUMB_BITS * part);
+                    r.mont_repr.data[part] &= ~(1ul << bit);
+                    bitno--;
+                }
+            }
+            return r;
+        })
         .def("inverse", &Fp_model<5l, libff::mnt46_modulus_B>::inverse);
         
 }

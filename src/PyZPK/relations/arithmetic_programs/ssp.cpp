@@ -7,44 +7,43 @@
 #include <libff/common/profiling.hpp>
 #include <libff/common/utils.hpp>
 #include <libfqfft/evaluation_domain/evaluation_domain.hpp>
-#include <libsnark/relations/arithmetic_programs/sap/sap.hpp>
+#include <map>
+#include <memory>
+#include <libsnark/relations/arithmetic_programs/ssp/ssp.hpp>
 
 using namespace std;
 namespace py = pybind11;
 using namespace libsnark;
 using namespace libff;
 
-// Implementation of interfaces for a SAP ("Square Arithmetic Program").
-void init_relations_arithmetic_programs_sap(py::module &m)
+// Implementation of interfaces for a SSP ("Square Span Program").
+void init_relations_arithmetic_programs_ssp(py::module &m)
 {
     using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
-    // A SAP instance.
-    py::class_<sap_instance<FieldT>>(m, "sap_instance")
+    // A SSP instance.
+    py::class_<ssp_instance<FieldT>>(m, "ssp_instance")
         .def(py::init<const std::shared_ptr<libfqfft::evaluation_domain<FieldT>> &,
                       const size_t,
                       const size_t,
                       const size_t,
-                      const std::vector<std::map<size_t, FieldT>> &,
                       const std::vector<std::map<size_t, FieldT>> &>())
         .def(py::init<const std::shared_ptr<libfqfft::evaluation_domain<FieldT>> &,
                       const size_t,
                       const size_t,
                       const size_t,
-                      std::vector<std::map<size_t, FieldT>> &,
                       std::vector<std::map<size_t, FieldT>> &>())
-        .def("num_variables", &sap_instance<FieldT>::num_variables)
-        .def("degree", &sap_instance<FieldT>::degree)
-        .def("num_inputs", &sap_instance<FieldT>::num_inputs)
-        .def("is_satisfied", &sap_instance<FieldT>::is_satisfied, py::arg("witness"));
+        .def("num_variables", &ssp_instance<FieldT>::num_variables)
+        .def("degree", &ssp_instance<FieldT>::degree)
+        .def("num_inputs", &ssp_instance<FieldT>::num_inputs)
+        .def("is_satisfied", &ssp_instance<FieldT>::is_satisfied, py::arg("witness"));
 
-    // A SAP instance evaluation is a SAP instance that is evaluated at a field element t.
-    py::class_<sap_instance_evaluation<FieldT>>(m, "sap_instance_evaluation")
+    // A SSP instance evaluation is a SSP instance that is evaluated at a field element t.
+    py::class_<ssp_instance_evaluation<FieldT>>(m, "ssp_instance_evaluation")
         .def(py::init<const std::shared_ptr<libfqfft::evaluation_domain<FieldT>> &,
                       const size_t,
                       const size_t,
                       const size_t,
                       const FieldT &,
-                      const std::vector<FieldT> &,
                       const std::vector<FieldT> &,
                       const std::vector<FieldT> &,
                       const FieldT &>())
@@ -55,19 +54,17 @@ void init_relations_arithmetic_programs_sap(py::module &m)
                       const FieldT &,
                       std::vector<FieldT> &&,
                       std::vector<FieldT> &&,
-                      std::vector<FieldT> &&,
                       const FieldT &>())
-        .def("num_variables", &sap_instance_evaluation<FieldT>::num_variables)
-        .def("degree", &sap_instance_evaluation<FieldT>::degree)
-        .def("num_inputs", &sap_instance_evaluation<FieldT>::num_inputs)
-        .def("is_satisfied", &sap_instance_evaluation<FieldT>::is_satisfied, py::arg("witness"));
+        .def("num_variables", &ssp_instance_evaluation<FieldT>::num_variables)
+        .def("degree", &ssp_instance_evaluation<FieldT>::degree)
+        .def("num_inputs", &ssp_instance_evaluation<FieldT>::num_inputs)
+        .def("is_satisfied", &ssp_instance_evaluation<FieldT>::is_satisfied, py::arg("witness"));
 
-    //A SAP witness.
-    py::class_<sap_witness<FieldT>>(m, "sap_witness")
+    //A SSP witness.
+    py::class_<ssp_witness<FieldT>>(m, "ssp_witness")
         .def(py::init<const size_t,
                       const size_t,
                       const size_t,
-                      const FieldT &,
                       const FieldT &,
                       const std::vector<FieldT> &,
                       const std::vector<FieldT> &>())
@@ -75,10 +72,9 @@ void init_relations_arithmetic_programs_sap(py::module &m)
                       const size_t,
                       const size_t,
                       const FieldT &,
-                      const FieldT &,
                       const std::vector<FieldT> &,
                       std::vector<FieldT> &>())
-        .def("num_variables", &sap_witness<FieldT>::num_variables)
-        .def("degree", &sap_witness<FieldT>::degree)
-        .def("num_inputs", &sap_witness<FieldT>::num_inputs);
+        .def("num_variables", &ssp_witness<FieldT>::num_variables)
+        .def("degree", &ssp_witness<FieldT>::degree)
+        .def("num_inputs", &ssp_witness<FieldT>::num_inputs);
 }

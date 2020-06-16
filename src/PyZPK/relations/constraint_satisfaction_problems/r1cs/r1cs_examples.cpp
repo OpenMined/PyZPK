@@ -10,6 +10,7 @@
 #include <libff/algebra/scalar_multiplication/multiexp.hpp>
 #include <libff/common/profiling.hpp>
 #include <libff/common/utils.hpp>
+#include <libsnark/relations/constraint_satisfaction_problems/r1cs/r1cs.hpp>
 #include <libsnark/relations/constraint_satisfaction_problems/r1cs/examples/r1cs_examples.hpp>
 
 using namespace std;
