@@ -8,13 +8,13 @@ A great first place to join the Community is the Slack channel <http://slack.ope
 
 ### Issues
 
-On <https://github.com/Benardi/PyZPK/issues> you can find all open Issues. You can find a detailed explanation on how to work with issues below under [Issue Allocation](#Issue-Allocation).
+On <https://github.com/OpenMined/PyZPK/issues> you can find all open Issues. You can find a detailed explanation on how to work with issues below under [Issue Allocation](#Issue-Allocation).
 
 ## Setup
 
 ### Forking a Repository
 
-To contribute to PyZPK you will need to fork the Benardi/PyZPK repository.
+To contribute to PyZPK you will need to fork the OpenMined/PyZPK repository.
 Then you can work risk-free on your fork.
 
 You will just need to fork once. After that you can call `git fetch upstream` and `git pull 'branch-name'` before you do your local changes to get the remote changes and be up-to-date
@@ -31,7 +31,7 @@ This can all also be done by running `make install_hooks`
 
 ### Syncing a Forked Repository
 
-To sync your fork with the Benardi/PyZPK repository please see this [Guide](https://help.github.com/articles/syncing-a-fork/) on how to sync your fork.
+To sync your fork with the OpenMined/PyZPK repository please see this [Guide](https://help.github.com/articles/syncing-a-fork/) on how to sync your fork.
 
 ## Contributing
 
