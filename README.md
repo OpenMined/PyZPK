@@ -1,3 +1,4 @@
+![OpenMined-logo](https://github.com/OpenMined/design-assets/blob/master/logos/OM/horizontal-primary-trans.png)
 ![](https://github.com/OpenMined/PyZPK/workflows/Tests/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache-yellow.svg)](https://github.com/OpenMined/PyZPK/blob/master/LICENSE)
 [![Python 3.5,3.6,3.7](https://img.shields.io/badge/python-3.5,3.6,3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
