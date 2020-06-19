@@ -49,11 +49,11 @@ void init_utils_Fp_model(py::module &m)
         .def(py::init<const bigint<5l> &>())
         .def(py::init<const long, const bool>())
         .def_readwrite("mont_repr", &Fp_model<5l, libff::mnt46_modulus_B>::mont_repr)
-        // .def_static("random_element", &Fp_model<5l, libff::mnt46_modulus_B>::random_element) // Todo
         .def_static("random_element", []() {
             Fp_model<5l, mnt46_modulus_B> r;
             while (mpn_cmp(r.mont_repr.data, mnt46_modulus_B.data, 5l))
             {
+                r.mont_repr.randomize();
                 size_t bitno = GMP_NUMB_BITS * 5 - 1;
                 while (mnt46_modulus_B.test_bit(bitno) == false)
                 {
@@ -65,6 +65,5 @@ void init_utils_Fp_model(py::module &m)
             }
             return r;
         })
-        .def("inverse", &Fp_model<5l, libff::mnt46_modulus_B>::inverse);
-        
+        .def("inverse", &Fp_model<5l, libff::mnt46_modulus_B>::inverse);  
 }
