@@ -11,6 +11,7 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/constraint_satisfaction_problems/r1cs/r1cs_examples.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/constraint_satisfaction_problems/uscs/uscs.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/constraint_satisfaction_problems/uscs/uscs_examples.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/circuit_satisfaction_problems/bacs/bacs.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/qap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/sap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/ssp.cpp"
