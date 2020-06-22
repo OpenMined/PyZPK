@@ -7,6 +7,7 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/routing_algorithms/as_waksman_routing_algorithm.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/default_types/r1cs_ppzkpcd_pp.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/default_types/tinyram_ppzksnark_pp.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/variable.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/constraint_satisfaction_problems/r1cs/r1cs.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/constraint_satisfaction_problems/r1cs/r1cs_examples.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/constraint_satisfaction_problems/uscs/uscs.cpp"

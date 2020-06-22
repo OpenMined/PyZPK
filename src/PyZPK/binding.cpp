@@ -8,6 +8,7 @@ void init_algorithms_benes(py::module &);
 void init_algorithms_as_waksman(py::module &);
 void init_default_types_r1cs_ppzkpcd_pp(py::module &);
 void init_default_types_tinyram_ppzksnark_pp(py::module &);
+void init_relations_variable(py::module &);
 void init_relations_constraint_satisfaction_problems_r1cs(py::module &);
 void init_relations_constraint_satisfaction_problems_r1cs_examples(py::module &);
 void init_relations_constraint_satisfaction_problems_uscs(py::module &);
@@ -30,6 +31,7 @@ PYBIND11_MODULE(pyzpk, m)
     init_algorithms_as_waksman(m);
     init_default_types_r1cs_ppzkpcd_pp(m);
     init_default_types_tinyram_ppzksnark_pp(m);
+    init_relations_variable(m);
     init_relations_constraint_satisfaction_problems_r1cs(m);
     init_relations_constraint_satisfaction_problems_r1cs_examples(m);
     init_relations_constraint_satisfaction_problems_uscs(m);
