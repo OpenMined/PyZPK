@@ -65,5 +65,11 @@ void init_utils_Fp_model(py::module &m)
             }
             return r;
         })
-        .def("inverse", &Fp_model<5l, libff::mnt46_modulus_B>::inverse);  
+        .def("inverse", &Fp_model<5l, libff::mnt46_modulus_B>::inverse)
+        .def("is_zero", &Fp_model<5l, libff::mnt46_modulus_B>::is_zero)
+        .def_static("one", &Fp_model<5l, libff::mnt46_modulus_B>::one)
+        .def_static("zero", &Fp_model<5l, libff::mnt46_modulus_B>::zero)
+        .def(py::self * py::self)
+        .def(py::self *= py::self)
+        .def(-py::self);  
 }
