@@ -16,6 +16,7 @@ void init_relations_constraint_satisfaction_problems_uscs_examples(py::module &)
 void init_relations_circuit_satisfaction_problems_bacs(py::module &);
 void init_relations_circuit_satisfaction_problems_bacs_examples(py::module &);
 void init_relations_circuit_satisfaction_problems_tbcs(py::module &);
+void init_relations_circuit_satisfaction_problems_tbcs_examples(py::module &);
 void init_relations_arithmetic_programs_qap(py::module &);
 void init_relations_arithmetic_programs_sap(py::module &);
 void init_relations_arithmetic_programs_ssp(py::module &);
@@ -41,6 +42,7 @@ PYBIND11_MODULE(pyzpk, m)
     init_relations_circuit_satisfaction_problems_bacs(m);
     init_relations_circuit_satisfaction_problems_bacs_examples(m);
     init_relations_circuit_satisfaction_problems_tbcs(m);
+    init_relations_circuit_satisfaction_problems_tbcs_examples(m);
     init_relations_arithmetic_programs_qap(m);
     init_relations_arithmetic_programs_sap(m);
     init_relations_arithmetic_programs_ssp(m);

@@ -109,8 +109,6 @@ void init_relations_circuit_satisfaction_problems_tbcs(py::module &m)
         .def("wire_depths", &tbcs_circuit::wire_depths)
         .def("depth", &tbcs_circuit::depth)
         .def("is_valid", &tbcs_circuit::is_valid)
-        // .def("depth", &tbcs_circuit::depth)
-
         .def("is_satisfied", &tbcs_circuit::is_satisfied, py::arg("primary_input"), py::arg("auxiliary_input"))
         .def("get_all_wires", &tbcs_circuit::get_all_wires, py::arg("primary_input"), py::arg("auxiliary_input"))
         .def("get_all_outputs", &tbcs_circuit::get_all_outputs, py::arg("primary_input"), py::arg("auxiliary_input"))
