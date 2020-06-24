@@ -14,6 +14,7 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/constraint_satisfaction_problems/uscs/uscs_examples.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/circuit_satisfaction_problems/bacs/bacs.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/circuit_satisfaction_problems/bacs/bacs_examples.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/circuit_satisfaction_problems/tbcs/tbcs.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/qap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/sap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/ssp.cpp"
