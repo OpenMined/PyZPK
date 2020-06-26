@@ -19,6 +19,7 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/qap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/sap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/arithmetic_programs/ssp.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/ram_computations/memory/memory.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/reductions/r1cs_to_qap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/reductions/uscs_to_ssp.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
