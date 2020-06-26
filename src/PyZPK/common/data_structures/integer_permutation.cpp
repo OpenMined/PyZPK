@@ -1,9 +1,5 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
-#include <algorithm>
-#include <cassert>
-#include <numeric>
-#include <unordered_set>
 #include <libsnark/common/data_structures/integer_permutation.hpp>
 
 using namespace std;

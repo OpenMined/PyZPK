@@ -1,15 +1,8 @@
 #include <pybind11/pybind11.h>
-#include <pybind11/operators.h>
 #include <pybind11/stl.h>
 #include <libff/algebra/curves/mnt/mnt6/mnt6_pp.hpp>
-#include <libff/algebra/fields/field_utils.hpp>
-#include <libff/algebra/scalar_multiplication/multiexp.hpp>
-#include <libff/common/profiling.hpp>
-#include <libff/common/utils.hpp>
-#include <libfqfft/evaluation_domain/evaluation_domain.hpp>
 #include <libsnark/relations/arithmetic_programs/qap/qap.hpp>
 
-using namespace std;
 namespace py = pybind11;
 using namespace libsnark;
 using namespace libff;

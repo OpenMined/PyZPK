@@ -10,5 +10,4 @@ void init_default_types_tinyram_ppzksnark_pp(py::module &m)
     // Binding for #include common/default_types/tinyram_ppzksnark_pp.hpp
     py::class_<default_tinyram_ppzksnark_pp>(m, "default_tinyram_ppzksnark_pp")
         .def_static("init_public_params", &default_tinyram_ppzksnark_pp::init_public_params);
-
 }
