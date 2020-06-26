@@ -1,29 +1,13 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
-#include <pybind11/stl_bind.h>
-#include <pybind11/cast.h>
-#include <pybind11/complex.h>
-#include <pybind11/functional.h>
-#include <pybind11/chrono.h>
-#include <vector>
-#include <cassert>
-#include <libff/algebra/curves/mnt/mnt6/mnt6_pp.hpp>
-#include <libff/algebra/fields/field_utils.hpp>
-#include <libff/algebra/scalar_multiplication/multiexp.hpp>
-#include <libff/common/profiling.hpp>
-#include <libff/common/utils.hpp>
 #include <libsnark/relations/circuit_satisfaction_problems/tbcs/tbcs.hpp>
 
-using namespace std;
 namespace py = pybind11;
 using namespace libsnark;
-using namespace libff;
 
 // Interfaces for a TBCS gate, a TBCS variable assignment, and a TBCS circuit.
 void init_relations_circuit_satisfaction_problems_tbcs(py::module &m)
 {
-    using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
-
     // Types of TBCS gates (2-input boolean gates).
     // Note that each gate's truth table is encoded in its 4-bit opcode. Namely,
     // if g(X,Y) denotes the output of gate g with inputs X and Y, then

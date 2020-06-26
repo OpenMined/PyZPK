@@ -1,6 +1,5 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
-#include <libff/common/serialization.hpp>
 #include <libsnark/common/data_structures/set_commitment.hpp>
 
 using namespace std;

@@ -1,20 +1,8 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
-#include <pybind11/stl_bind.h>
-#include <pybind11/cast.h>
-#include <pybind11/complex.h>
-#include <pybind11/functional.h>
-#include <pybind11/chrono.h>
-#include <vector>
-#include <cassert>
 #include <libff/algebra/curves/mnt/mnt6/mnt6_pp.hpp>
-#include <libff/algebra/fields/field_utils.hpp>
-#include <libff/algebra/scalar_multiplication/multiexp.hpp>
-#include <libff/common/profiling.hpp>
-#include <libff/common/utils.hpp>
 #include <libsnark/relations/circuit_satisfaction_problems/bacs/bacs.hpp>
 
-using namespace std;
 namespace py = pybind11;
 using namespace libsnark;
 using namespace libff;

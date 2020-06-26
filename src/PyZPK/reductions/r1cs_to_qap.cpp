@@ -1,13 +1,6 @@
 #include <pybind11/pybind11.h>
-#include <pybind11/operators.h>
 #include <pybind11/stl.h>
 #include <libff/algebra/curves/mnt/mnt6/mnt6_pp.hpp>
-#include <libff/algebra/fields/field_utils.hpp>
-#include <libff/algebra/scalar_multiplication/multiexp.hpp>
-#include <libff/common/profiling.hpp>
-#include <libff/common/utils.hpp>
-#include <libsnark/relations/arithmetic_programs/qap/qap.hpp>
-#include <libsnark/relations/constraint_satisfaction_problems/r1cs/r1cs.hpp>
 #include <libsnark/reductions/r1cs_to_qap/r1cs_to_qap.hpp>
 using namespace std;
 namespace py = pybind11;
