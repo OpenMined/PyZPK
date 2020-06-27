@@ -34,15 +34,9 @@ def test_tbcs_gate_type_enum():
                          [(10, 10, 20, 5)])
 def test_tbcs(primary_input_size, auxiliary_input_size, num_gates, num_outputs):
     assert num_outputs <= num_gates
-    primary_input_size = 10
-    auxiliary_input_size = 10
-    num_gates = 20
-    num_outputs = 5
     RAND_MAX = 32767
     num_tbcs_gate_types = 16
-
     example = pyzpk.tbcs_example()
-
     primary_input_list = list()
     auxiliary_input_list = list()
     for i in range(0, primary_input_size):
