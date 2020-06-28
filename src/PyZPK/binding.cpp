@@ -21,6 +21,7 @@ void init_relations_arithmetic_programs_qap(py::module &);
 void init_relations_arithmetic_programs_sap(py::module &);
 void init_relations_arithmetic_programs_ssp(py::module &);
 void init_relations_ram_computations_memory(py::module &);
+void init_relations_ram_computations_rams_tinyram(py::module &);
 void init_relations_ram_computations_rams_fooram(py::module &);
 void init_reductions_r1cs_to_qap(py::module &);
 void init_reductions_uscs_to_ssp(py::module &);
@@ -49,6 +50,7 @@ PYBIND11_MODULE(pyzpk, m)
     init_relations_arithmetic_programs_sap(m);
     init_relations_arithmetic_programs_ssp(m);
     init_relations_ram_computations_memory(m);
+    init_relations_ram_computations_rams_tinyram(m);
     init_relations_ram_computations_rams_fooram(m);
     init_reductions_r1cs_to_qap(m);
     init_reductions_uscs_to_ssp(m);
