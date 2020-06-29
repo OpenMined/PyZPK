@@ -60,9 +60,58 @@ void declare_tinyram_opcode_args(py::module &m)
         .value("tinyram_opcode_args_arg2_des", tinyram_opcode_args_arg2_des);
 }
 
+void declare_tinyram_architecture_params(py::module &m)
+{
+    m.def("ensure_tinyram_opcode_value_map", ensure_tinyram_opcode_value_map);
+
+    py::class_<tinyram_program>(m,"tinyram_program");
+    py::class_<reg_count_t>(m,"reg_count_t");
+    py::class_<reg_width_t>(m,"reg_width_t");
+
+    py::class_<tinyram_input_tape>(m,"tinyram_input_tape");
+    py::class_<tinyram_input_tape_iterator>(m,"tinyram_input_tape_iterator");
+
+    py::class_<tinyram_architecture_params>(m, "tinyram_architecture_params")
+        .def(py::init<>())
+        .def(py::init<const reg_width_t, const reg_count_t>())
+        .def_readwrite("w", &tinyram_architecture_params::w, "width of a register")
+        .def_readwrite("k", &tinyram_architecture_params::k, "number of registers")
+        .def("address_size", &tinyram_architecture_params::address_size)
+        .def("value_size", &tinyram_architecture_params::value_size)
+        .def("cpu_state_size", &tinyram_architecture_params::cpu_state_size)
+        .def("initial_pc_addr", &tinyram_architecture_params::initial_pc_addr)
+        .def("initial_cpu_state", &tinyram_architecture_params::initial_cpu_state)
+        .def("initial_memory_contents", &tinyram_architecture_params::initial_memory_contents, py::arg("program"), py::arg("primary_input"))
+        .def("opcode_width", &tinyram_architecture_params::opcode_width)
+        .def("reg_arg_width", &tinyram_architecture_params::reg_arg_width)
+        .def("instruction_padding_width", &tinyram_architecture_params::instruction_padding_width)
+        .def("reg_arg_or_imm_width", &tinyram_architecture_params::reg_arg_or_imm_width)
+        .def("dwaddr_len", &tinyram_architecture_params::dwaddr_len)
+        .def("subaddr_len", &tinyram_architecture_params::subaddr_len)
+        .def("bytes_in_word", &tinyram_architecture_params::bytes_in_word)
+        .def("instr_size", &tinyram_architecture_params::instr_size)
+        .def("print", &tinyram_architecture_params::print)
+        .def(
+            "__eq__", [](tinyram_architecture_params const &self, tinyram_architecture_params const &other) { return self == other; }, py::is_operator())
+        .def("__ostr__", [](tinyram_architecture_params const &self) {
+            std::ostringstream os;
+            os << self.w << "\n";
+            os << self.k << "\n";
+            return os;
+        })
+        .def("__istr__", [](tinyram_architecture_params &self) {
+            std::istringstream os;
+            os >> self.w;
+            libff::consume_newline(os);
+            os >> self.k;
+            libff::consume_newline(os);
+            return os;
+        });
+}
 
 void init_relations_ram_computations_rams_tinyram(py::module &m)
 {
     declare_tinyram_opcode(m);
     declare_tinyram_opcode_args(m);
+    declare_tinyram_architecture_params(m);
 }
