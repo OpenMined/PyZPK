@@ -64,13 +64,6 @@ void declare_tinyram_architecture_params(py::module &m)
 {
     m.def("ensure_tinyram_opcode_value_map", ensure_tinyram_opcode_value_map);
 
-    py::class_<tinyram_program>(m,"tinyram_program");
-    py::class_<reg_count_t>(m,"reg_count_t");
-    py::class_<reg_width_t>(m,"reg_width_t");
-
-    py::class_<tinyram_input_tape>(m,"tinyram_input_tape");
-    py::class_<tinyram_input_tape_iterator>(m,"tinyram_input_tape_iterator");
-
     py::class_<tinyram_architecture_params>(m, "tinyram_architecture_params")
         .def(py::init<>())
         .def(py::init<const reg_width_t, const reg_count_t>())
@@ -109,9 +102,43 @@ void declare_tinyram_architecture_params(py::module &m)
         });
 }
 
+void declare_tinyram_instruction(py::module &m)
+{
+    py::class_<tinyram_instruction>(m, "tinyram_instruction")
+        .def_readwrite("opcode", &tinyram_instruction::opcode)
+        .def_readwrite("arg2_is_imm", &tinyram_instruction::arg2_is_imm)
+        .def_readwrite("desidx", &tinyram_instruction::desidx)
+        .def_readwrite("arg1idx", &tinyram_instruction::arg1idx)
+        .def_readwrite("arg2idx_or_imm", &tinyram_instruction::arg2idx_or_imm)
+        .def(py::init<const tinyram_opcode &,
+                      const bool,
+                      const size_t &,
+                      const size_t &,
+                      const size_t &>())
+        .def("as_dword", &tinyram_instruction::as_dword, py::arg("tinyram_architecture_params"));
+
+    m.def("random_tinyram_instruction", &random_tinyram_instruction, py::arg("tinyram_architecture_params"));
+    m.def("generate_tinyram_prelude", &generate_tinyram_prelude, py::arg("tinyram_architecture_params"));
+}
+
+void declare_tinyram_program(py::module &m)
+{
+    py::class_<tinyram_program>(m, "tinyram_program")
+        .def_readwrite("instructions", &tinyram_program::instructions)
+        .def("size", &tinyram_program::size)
+        .def("add_instruction", &tinyram_program::add_instruction, py::arg("tinyram_instruction"));
+
+    m.def("load_preprocessed_program", &load_preprocessed_program, py::arg("architecture_params"), py::arg("preprocessed"));
+    m.def("tinyram_boot_trace_from_program_and_input", &tinyram_boot_trace_from_program_and_input,
+          py::arg("architecture_params"), py::arg("boot_trace_size_bound"), py::arg("tinyram_program"), py::arg("primary_input"));
+    m.def("load_tape", &load_tape, py::arg("tape"));
+}
+
 void init_relations_ram_computations_rams_tinyram(py::module &m)
 {
     declare_tinyram_opcode(m);
     declare_tinyram_opcode_args(m);
     declare_tinyram_architecture_params(m);
+    declare_tinyram_instruction(m);
+    declare_tinyram_program(m);
 }
