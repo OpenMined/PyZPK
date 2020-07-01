@@ -25,6 +25,7 @@ void init_relations_ram_computations_rams_tinyram(py::module &);
 void init_relations_ram_computations_rams_fooram(py::module &);
 void init_reductions_r1cs_to_qap(py::module &);
 void init_reductions_uscs_to_ssp(py::module &);
+void init_reductions_bacs_to_r1cs(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -54,4 +55,5 @@ PYBIND11_MODULE(pyzpk, m)
     init_relations_ram_computations_rams_fooram(m);
     init_reductions_r1cs_to_qap(m);
     init_reductions_uscs_to_ssp(m);
+    init_reductions_bacs_to_r1cs(m);
 }
