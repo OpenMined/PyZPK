@@ -22,9 +22,10 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/ram_computations/memory/memory.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/ram_computations/rams/tinyram.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/relations/ram_computations/rams/fooram.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/reductions/r1cs_to_qap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/reductions/uscs_to_ssp.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/reductions/r1cs_to_qap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/reductions/bacs_to_r1cs.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/constraint_profiling.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 
