@@ -28,6 +28,7 @@ void init_reductions_r1cs_to_qap(py::module &);
 void init_reductions_uscs_to_ssp(py::module &);
 void init_gadgetlib1_constraint_profiling(py::module &);
 void init_gadgetlib1_gadget(py::module &);
+void init_gadgetlib1_protoboard(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -60,4 +61,5 @@ PYBIND11_MODULE(pyzpk, m)
     init_reductions_uscs_to_ssp(m);
     init_gadgetlib1_constraint_profiling(m);
     init_gadgetlib1_gadget(m);
+    init_gadgetlib1_protoboard(m);
 }
