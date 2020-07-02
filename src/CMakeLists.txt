@@ -26,6 +26,7 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/reductions/r1cs_to_qap.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/reductions/bacs_to_r1cs.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/constraint_profiling.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadget.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 
