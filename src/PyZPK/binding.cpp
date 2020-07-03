@@ -23,8 +23,13 @@ void init_relations_arithmetic_programs_ssp(py::module &);
 void init_relations_ram_computations_memory(py::module &);
 void init_relations_ram_computations_rams_tinyram(py::module &);
 void init_relations_ram_computations_rams_fooram(py::module &);
+void init_reductions_bacs_to_r1cs(py::module &);
 void init_reductions_r1cs_to_qap(py::module &);
 void init_reductions_uscs_to_ssp(py::module &);
+void init_gadgetlib1_constraint_profiling(py::module &);
+void init_gadgetlib1_gadget(py::module &);
+void init_gadgetlib1_protoboard(py::module &);
+void init_gadgetlib1_pb_variable(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -52,6 +57,11 @@ PYBIND11_MODULE(pyzpk, m)
     init_relations_ram_computations_memory(m);
     init_relations_ram_computations_rams_tinyram(m);
     init_relations_ram_computations_rams_fooram(m);
+    init_reductions_bacs_to_r1cs(m);
     init_reductions_r1cs_to_qap(m);
     init_reductions_uscs_to_ssp(m);
+    init_gadgetlib1_constraint_profiling(m);
+    init_gadgetlib1_gadget(m);
+    init_gadgetlib1_protoboard(m);
+    init_gadgetlib1_pb_variable(m);
 }

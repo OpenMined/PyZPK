@@ -51,7 +51,6 @@ def test_sap(sap_degree, num_inputs, binary_input):
     t = pyzpk.Fp_model.random_element()
     d1 = pyzpk.Fp_model.random_element()
     d2 = pyzpk.Fp_model.random_element()
-    d3 = pyzpk.Fp_model.random_element()
 
 # Test for SSP
 @pytest.mark.parametrize("num_constraints, num_inputs, binary_input",
