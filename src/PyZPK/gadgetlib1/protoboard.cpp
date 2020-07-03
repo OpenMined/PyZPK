@@ -31,5 +31,5 @@ void init_gadgetlib1_protoboard(py::module &m)
         .def("full_variable_assignment", &protoboard<FieldT>::full_variable_assignment)
         .def("primary_input", &protoboard<FieldT>::primary_input)
         .def("auxiliary_input", &protoboard<FieldT>::auxiliary_input)
-        .def("get_constraint_system", &protoboard<FieldT>::get_constraint_system)
+        .def("get_constraint_system", &protoboard<FieldT>::get_constraint_system);
 }
