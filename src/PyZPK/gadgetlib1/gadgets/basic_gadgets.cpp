@@ -112,6 +112,51 @@ void declare_conjunction_gadget(py::module &m)
         .def("generate_r1cs_witness", &conjunction_gadget<FieldT>::generate_r1cs_witness);
 }
 
+void declare_comparison_gadget(py::module &m)
+{
+    using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
+
+    py::class_<comparison_gadget<FieldT>>(m, "comparison_gadget")
+        .def(py::init<protoboard<FieldT> &,
+                      const size_t,
+                      const pb_linear_combination<FieldT> &,
+                      const pb_linear_combination<FieldT> &,
+                      const pb_variable<FieldT> &,
+                      const pb_variable<FieldT> &,
+                      const std::string &>())
+        .def("generate_r1cs_constraints", &comparison_gadget<FieldT>::generate_r1cs_constraints)
+        .def("generate_r1cs_witness", &comparison_gadget<FieldT>::generate_r1cs_witness);
+}
+
+void declare_inner_product_gadget(py::module &m)
+{
+    using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
+
+    py::class_<inner_product_gadget<FieldT>>(m, "inner_product_gadget")
+        .def(py::init<protoboard<FieldT> &,
+                      const pb_linear_combination_array<FieldT> &,
+                      const pb_linear_combination_array<FieldT> &,
+                      const pb_variable<FieldT> &,
+                      const std::string &>())
+        .def("generate_r1cs_constraints", &inner_product_gadget<FieldT>::generate_r1cs_constraints)
+        .def("generate_r1cs_witness", &inner_product_gadget<FieldT>::generate_r1cs_witness);
+}
+
+void declare_loose_multiplexing_gadget(py::module &m)
+{
+    using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
+
+    py::class_<loose_multiplexing_gadget<FieldT>>(m, "loose_multiplexing_gadget")
+        .def(py::init<protoboard<FieldT> &,
+                      const pb_linear_combination_array<FieldT> &,
+                      const pb_variable<FieldT> &,
+                      const pb_variable<FieldT> &,
+                      const pb_variable<FieldT> &,
+                      const std::string &>())
+        .def("generate_r1cs_constraints", &loose_multiplexing_gadget<FieldT>::generate_r1cs_constraints)
+        .def("generate_r1cs_witness", &loose_multiplexing_gadget<FieldT>::generate_r1cs_witness);
+}
+
 void init_gadgetlib1_gadgets_basic_gadgets(py::module &m)
 {
     declare_packing_gadget(m);
@@ -121,4 +166,7 @@ void init_gadgetlib1_gadgets_basic_gadgets(py::module &m)
     declare_dual_variable_gadget(m);
     declare_disjunction_gadget(m);
     declare_conjunction_gadget(m);
+    declare_comparison_gadget(m);
+    declare_inner_product_gadget(m);
+    declare_loose_multiplexing_gadget(m);
 }
