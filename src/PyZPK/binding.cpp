@@ -30,6 +30,7 @@ void init_gadgetlib1_constraint_profiling(py::module &);
 void init_gadgetlib1_gadget(py::module &);
 void init_gadgetlib1_protoboard(py::module &);
 void init_gadgetlib1_pb_variable(py::module &);
+void init_gadgetlib1_gadgets_basic_gadgets(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -64,4 +65,5 @@ PYBIND11_MODULE(pyzpk, m)
     init_gadgetlib1_gadget(m);
     init_gadgetlib1_protoboard(m);
     init_gadgetlib1_pb_variable(m);
+    init_gadgetlib1_gadgets_basic_gadgets(m);
 }
