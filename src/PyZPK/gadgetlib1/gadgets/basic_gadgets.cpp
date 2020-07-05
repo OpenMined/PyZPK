@@ -66,10 +66,45 @@ void declare_bit_vector_copy_gadget(py::module &m)
         .def("generate_r1cs_witness", &bit_vector_copy_gadget<FieldT>::generate_r1cs_witness);
 }
 
+void declare_dual_variable_gadget(py::module &m)
+{
+    using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
+
+    py::class_<dual_variable_gadget<FieldT>>(m, "dual_variable_gadget")
+        .def(py::init<protoboard<FieldT> &,
+                      const size_t,
+                      const std::string &>())
+        .def(py::init<protoboard<FieldT> &,
+                      const pb_variable_array<FieldT> &,
+                      const std::string &>())
+        .def(py::init<protoboard<FieldT> &,
+                      const pb_variable<FieldT> &,
+                      const size_t,
+                      const std::string &>())
+        .def("generate_r1cs_constraints", &dual_variable_gadget<FieldT>::generate_r1cs_constraints, py::arg("enforce_bitness"))
+        .def("generate_r1cs_witness_from_packed", &dual_variable_gadget<FieldT>::generate_r1cs_witness_from_packed)
+        .def("generate_r1cs_witness_from_bits", &dual_variable_gadget<FieldT>::generate_r1cs_witness_from_bits);
+}
+
+void declare_disjunction_gadget(py::module &m)
+{
+    using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
+
+    py::class_<disjunction_gadget<FieldT>>(m, "disjunction_gadget")
+        .def(py::init<protoboard<FieldT> &,
+                      const pb_variable_array<FieldT> &,
+                      const pb_variable<FieldT> &,
+                      const std::string &>())
+        .def("generate_r1cs_constraints", &disjunction_gadget<FieldT>::generate_r1cs_constraints)
+        .def("generate_r1cs_witness", &disjunction_gadget<FieldT>::generate_r1cs_witness);
+}
+
 void init_gadgetlib1_gadgets_basic_gadgets(py::module &m)
 {
     declare_packing_gadget(m);
     declare_multipacking_gadget(m);
     declare_field_vector_copy_gadget(m);
     declare_bit_vector_copy_gadget(m);
+    declare_dual_variable_gadget(m);
+    declare_disjunction_gadget(m);
 }
