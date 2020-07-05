@@ -52,3 +52,23 @@ def test_disjunction_gadget():
     d.generate_r1cs_witness()
     assert pb.is_satisfied() == True
 
+def test_conjunction_gadget():
+
+    n = 10
+    pb = pyzpk.protoboard()
+
+    inputs = pyzpk.pb_variable_array()
+    inputs.allocate(pb, n, "inputs")
+
+    output = pyzpk.pb_variable(0)
+    output.allocate(pb, "output")
+
+    c = pyzpk.conjunction_gadget(pb, inputs, output, "c")
+    c.generate_r1cs_constraints()
+
+    for w in range(0, 1<<n):
+        for j in range(0, n):
+            inputs.get_vals(pb)[j] = pyzpk.Fp_model(pyzpk.bigint(1) if w&(1<<j) else pyzpk.bigint(0))
+
+    c.generate_r1cs_witness()
+    assert pb.is_satisfied() == True

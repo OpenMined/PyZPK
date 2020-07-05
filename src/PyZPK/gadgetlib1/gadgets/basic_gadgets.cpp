@@ -99,6 +99,19 @@ void declare_disjunction_gadget(py::module &m)
         .def("generate_r1cs_witness", &disjunction_gadget<FieldT>::generate_r1cs_witness);
 }
 
+void declare_conjunction_gadget(py::module &m)
+{
+    using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
+
+    py::class_<conjunction_gadget<FieldT>>(m, "conjunction_gadget")
+        .def(py::init<protoboard<FieldT> &,
+                      const pb_variable_array<FieldT> &,
+                      const pb_variable<FieldT> &,
+                      const std::string &>())
+        .def("generate_r1cs_constraints", &conjunction_gadget<FieldT>::generate_r1cs_constraints)
+        .def("generate_r1cs_witness", &conjunction_gadget<FieldT>::generate_r1cs_witness);
+}
+
 void init_gadgetlib1_gadgets_basic_gadgets(py::module &m)
 {
     declare_packing_gadget(m);
@@ -107,4 +120,5 @@ void init_gadgetlib1_gadgets_basic_gadgets(py::module &m)
     declare_bit_vector_copy_gadget(m);
     declare_dual_variable_gadget(m);
     declare_disjunction_gadget(m);
+    declare_conjunction_gadget(m);
 }
