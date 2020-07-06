@@ -28,7 +28,7 @@ def test_bacs():
 
     # Test for pb_linear_combination_array
     pb_A = pyzpk.pb_linear_combination_array()
-    pb_A.evaluate(pb)
+    assert pb_A.evaluate(pb) == None
 
 def test_disjunction_gadget():
 
@@ -49,7 +49,7 @@ def test_disjunction_gadget():
         for j in range(0, n):
             inputs.get_vals(pb)[j] = pyzpk.Fp_model(pyzpk.bigint(1) if w&(1<<j) else pyzpk.bigint(0))
 
-    d.generate_r1cs_witness()
+    assert d.generate_r1cs_witness() == None
     assert pb.is_satisfied() == True
 
 def test_conjunction_gadget():
@@ -70,5 +70,31 @@ def test_conjunction_gadget():
         for j in range(0, n):
             inputs.get_vals(pb)[j] = pyzpk.Fp_model(pyzpk.bigint(1) if w&(1<<j) else pyzpk.bigint(0))
 
-    c.generate_r1cs_witness()
+    assert c.generate_r1cs_witness() == None
     assert pb.is_satisfied() == True
+
+def test_comparison_gadget():
+
+    n = 10
+    pb = pyzpk.protoboard()
+
+    A = pyzpk.pb_linear_combination()
+    B = pyzpk.pb_linear_combination()
+    less = pyzpk.pb_variable(0)
+    less_or_eq = pyzpk.pb_variable(0)
+    lc = pyzpk.linear_combination()
+
+    A.assign(pb, lc) 
+    B.assign(pb, lc)
+
+    assert A.evaluate(pb) == None
+    assert B.evaluate(pb) == None
+
+    less.allocate(pb, "less")
+    less_or_eq.allocate(pb, "less_or_eq")
+
+    cmp = pyzpk.comparison_gadget(pb, n, A, B, less, less_or_eq, "cmp")
+    cmp.generate_r1cs_constraints()
+    assert cmp.generate_r1cs_witness() == None
+    assert pb.is_satisfied() == True
+
