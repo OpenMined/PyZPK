@@ -30,6 +30,7 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/protoboard.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/pb_variable.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/basic_gadgets.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/gadget_from_r1cs.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 
