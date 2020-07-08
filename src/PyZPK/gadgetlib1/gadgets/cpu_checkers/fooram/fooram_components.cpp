@@ -20,7 +20,7 @@ void declare_bar_gadget(py::module &m)
 {
     using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
 
-    py::class_<bar_gadget<FieldT>>(m, "bar_gadget")
+    py::class_<bar_gadget<FieldT>, gadget<FieldT>>(m, "bar_gadget")
         .def(py::init<protoboard<FieldT> &,
                       const pb_linear_combination_array<FieldT> &,
                       const FieldT &,
@@ -37,7 +37,7 @@ void declare_fooram_protoboard(py::module &m)
 {
     using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
 
-    py::class_<fooram_protoboard<FieldT>>(m, "fooram_protoboard")
+    py::class_<fooram_protoboard<FieldT>, protoboard<FieldT>>(m, "fooram_protoboard")
         .def(py::init<const fooram_architecture_params &>());
 }
 
@@ -45,7 +45,7 @@ void declare_fooram_gadget(py::module &m)
 {
     using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
 
-    py::class_<fooram_gadget<FieldT>>(m, "fooram_gadget")
+    py::class_<fooram_gadget<FieldT>, gadget<FieldT>>(m, "fooram_gadget")
         .def(py::init<fooram_protoboard<FieldT> &, const std::string &>());
 }
 

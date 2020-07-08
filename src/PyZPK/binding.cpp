@@ -35,6 +35,7 @@ void init_gadgetlib1_gadgets_from_r1cs(py::module &);
 void init_gadgetlib1_fooram_components(py::module &);
 void init_gadgetlib1_fooram_cpu_checker(py::module &);
 void init_gadgetlib1_tinyram_components(py::module &);
+void init_gadgetlib1_tinyram_alu_arithmetic(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -74,4 +75,5 @@ PYBIND11_MODULE(pyzpk, m)
     init_gadgetlib1_fooram_components(m);
     init_gadgetlib1_fooram_cpu_checker(m);
     init_gadgetlib1_tinyram_components(m);
+    init_gadgetlib1_tinyram_alu_arithmetic(m);
 }

@@ -12,7 +12,7 @@ void init_gadgetlib1_gadgets_from_r1cs(py::module &m)
 {
     using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
 
-    py::class_<gadget_from_r1cs<FieldT>>(m, "gadget_from_r1cs")
+    py::class_<gadget_from_r1cs<FieldT>, gadget<FieldT>>(m, "gadget_from_r1cs")
         .def(py::init<protoboard<FieldT> &,
                      const std::vector<pb_variable_array<FieldT> > &,
                      const r1cs_constraint_system<FieldT> &,

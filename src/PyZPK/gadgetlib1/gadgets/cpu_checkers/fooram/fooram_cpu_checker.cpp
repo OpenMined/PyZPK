@@ -21,7 +21,7 @@ void init_gadgetlib1_fooram_cpu_checker(py::module &m)
 {
     using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
 
-    py::class_<fooram_cpu_checker<FieldT>>(m, "fooram_cpu_checker")
+    py::class_<fooram_cpu_checker<FieldT>, fooram_gadget<FieldT>>(m, "fooram_cpu_checker")
         .def(py::init<fooram_protoboard<FieldT> &,
                        pb_variable_array<FieldT> &,
                        pb_variable_array<FieldT> &,
