@@ -38,6 +38,10 @@ void init_gadgetlib1_tinyram_components(py::module &);
 void init_gadgetlib1_tinyram_word_variable_gadget(py::module &);
 void init_gadgetlib1_tinyram_alu_arithmetic(py::module &);
 void init_gadgetlib1_tinyram_alu_control_flow(py::module &);
+void init_gadgetlib1_tinyram_alu_gadget(py::module &);
+void init_gadgetlib1_tinyram_argument_decoder_gadget(py::module &);
+void init_gadgetlib1_tinyram_consistency_enforcer_gadget(py::module &);
+void init_gadgetlib1_tinyram_memory_masking_gadget(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -80,4 +84,8 @@ PYBIND11_MODULE(pyzpk, m)
     init_gadgetlib1_tinyram_word_variable_gadget(m);
     init_gadgetlib1_tinyram_alu_arithmetic(m);
     init_gadgetlib1_tinyram_alu_control_flow(m);
+    init_gadgetlib1_tinyram_alu_gadget(m);
+    init_gadgetlib1_tinyram_argument_decoder_gadget(m);
+    init_gadgetlib1_tinyram_consistency_enforcer_gadget(m);
+    init_gadgetlib1_tinyram_memory_masking_gadget(m);
 }

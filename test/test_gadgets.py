@@ -98,24 +98,82 @@ def test_comparison_gadget():
     assert cmp.generate_r1cs_witness() == None
     assert pb.is_satisfied() == True
 
-def test_tinyram():
+def test_tinyram_control_flow():
+    
     ap = pyzpk.tinyram_architecture_params(16,16)
     P = pyzpk.tinyram_program
+
     P.instructions = pyzpk.generate_tinyram_prelude(ap)
+
     size = len(P.instructions)
     pb = pyzpk.tinyram_protoboard(ap)
+
     pc = pyzpk.word_variable_gadget(pb, "pc")
     argval2 = pyzpk.word_variable_gadget(pb, "argval2")
+
     flag = pyzpk.pb_variable(0)
     result = pyzpk.pb_variable(0)
+
     flag.allocate(pb, "flag")
     result.allocate(pb, "result")
+
     pc.generate_r1cs_constraints(True)
     argval2.generate_r1cs_constraints(True)
+
     flag.allocate(pb, "flag")
     result.allocate(pb, "result")
+
     jmp = pyzpk.ALU_jmp_gadget(pb, pc, argval2, flag, result, "jmp")
     jmp.generate_r1cs_constraints()
+
+    pb.set_val(argval2.packed, pyzpk.Fp_model(pyzpk.bigint(123)))
+
     argval2.generate_r1cs_witness_from_packed()
     jmp.generate_r1cs_witness()
+
+    assert pb.get_val(result).is_zero() == pyzpk.Fp_model(pyzpk.bigint(123 >> ap.subaddr_len())).is_zero()
+    assert pb.is_satisfied() == True
+    
+def test_tinyram_argument_decoder():
+    ap = pyzpk.tinyram_architecture_params(16,16)
+    P = pyzpk.tinyram_program
+
+    P.instructions = pyzpk.generate_tinyram_prelude(ap)
+
+    pb = pyzpk.tinyram_protoboard(ap)
+
+    packed_registers = pyzpk.pb_variable(0)
+    packed_registers.allocate(pb, "packed_registers")
+
+    arg2_is_imm = pyzpk.pb_variable_array()
+
+    desidx = pyzpk.dual_variable_gadget(pb, ap.reg_arg_width(), "desidx")
+    arg1idx = pyzpk.dual_variable_gadget(pb, ap.reg_arg_width(), "arg1idx")
+    arg2idx = pyzpk.dual_variable_gadget(pb, ap.reg_arg_width(), "arg2idx")
+
+    packed_desval = pyzpk.pb_variable(0)
+    packed_arg1val = pyzpk.pb_variable(0)
+    packed_arg2val = pyzpk.pb_variable(0)
+
+    packed_desval.allocate(pb, "packed_desval")
+    packed_arg1val.allocate(pb, "packed_arg1val")
+    packed_arg2val.allocate(pb, "packed_arg2val")
+
+    g = pyzpk.argument_decoder_gadget(pb, packed_registers, arg2_is_imm, desidx.bits, arg1idx.bits, 
+                                    arg2idx.bits,packed_desval, packed_arg1val, packed_arg2val, "g")
+    g.generate_r1cs_constraints()
+
+    pb.set_val(desidx.packed, pyzpk.Fp_model(pyzpk.bigint(2)))
+    pb.set_val(arg1idx.packed, pyzpk.Fp_model(pyzpk.bigint(5)))
+    pb.set_val(arg2idx.packed, pyzpk.Fp_model(pyzpk.bigint(10)))
+
+    desidx.generate_r1cs_witness_from_packed()
+    arg1idx.generate_r1cs_witness_from_packed()
+    arg2idx.generate_r1cs_witness_from_packed()
+
+    g.generate_r1cs_witness()
+
+    assert pb.get_val(packed_desval).is_zero() == pyzpk.Fp_model(pyzpk.bigint(1002)).is_zero()
+    assert pb.get_val(packed_desval).is_zero() == pyzpk.Fp_model(pyzpk.bigint(1005)).is_zero()
+    assert pb.get_val(packed_desval).is_zero() == pyzpk.Fp_model(pyzpk.bigint(1007)).is_zero()
     assert pb.is_satisfied() == True

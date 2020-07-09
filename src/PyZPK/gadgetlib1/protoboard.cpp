@@ -23,7 +23,7 @@ void init_gadgetlib1_protoboard(py::module &m)
         .def("augment_variable_annotation", &protoboard<FieldT>::augment_variable_annotation, py::arg("pb_variable"), py::arg("postfix"))
         .def("is_satisfied", &protoboard<FieldT>::is_satisfied)
         // .def("dump_variables", &protoboard<FieldT>::dump_variables)
-        // invalid use of member function 
+        // invalid use of member function
         .def("num_constraints", &protoboard<FieldT>::num_constraints)
         .def("num_inputs", &protoboard<FieldT>::num_inputs)
         .def("num_variables", &protoboard<FieldT>::num_variables)
@@ -31,5 +31,11 @@ void init_gadgetlib1_protoboard(py::module &m)
         .def("full_variable_assignment", &protoboard<FieldT>::full_variable_assignment)
         .def("primary_input", &protoboard<FieldT>::primary_input)
         .def("auxiliary_input", &protoboard<FieldT>::auxiliary_input)
-        .def("get_constraint_system", &protoboard<FieldT>::get_constraint_system);
+        .def("get_constraint_system", &protoboard<FieldT>::get_constraint_system)
+        .def("set_val", [](protoboard<FieldT> const &self, const pb_variable<FieldT> &var, FieldT &f) {
+            self.val(var) = f;
+        })
+        .def("get_val", [](protoboard<FieldT> const &self, const pb_variable<FieldT> &var) {
+            return self.val(var);
+        });
 }
