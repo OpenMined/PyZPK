@@ -33,8 +33,10 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/gadget_from_r1cs.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/cpu_checkers/fooram/fooram_components.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/cpu_checkers/fooram/fooram_cpu_checker.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/cpu_checkers/tinyram/tinyram_components.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/cpu_checkers/tinyram/tinyram_protoboard.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/cpu_checkers/tinyram/word_variable_gadget.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/cpu_checkers/tinyram/alu_arithmetic.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/cpu_checkers/tinyram/alu_control_flow.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 

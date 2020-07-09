@@ -98,3 +98,24 @@ def test_comparison_gadget():
     assert cmp.generate_r1cs_witness() == None
     assert pb.is_satisfied() == True
 
+def test_tinyram():
+    ap = pyzpk.tinyram_architecture_params(16,16)
+    P = pyzpk.tinyram_program
+    P.instructions = pyzpk.generate_tinyram_prelude(ap)
+    size = len(P.instructions)
+    pb = pyzpk.tinyram_protoboard(ap)
+    pc = pyzpk.word_variable_gadget(pb, "pc")
+    argval2 = pyzpk.word_variable_gadget(pb, "argval2")
+    flag = pyzpk.pb_variable(0)
+    result = pyzpk.pb_variable(0)
+    flag.allocate(pb, "flag")
+    result.allocate(pb, "result")
+    pc.generate_r1cs_constraints(True)
+    argval2.generate_r1cs_constraints(True)
+    flag.allocate(pb, "flag")
+    result.allocate(pb, "result")
+    jmp = pyzpk.ALU_jmp_gadget(pb, pc, argval2, flag, result, "jmp")
+    jmp.generate_r1cs_constraints()
+    argval2.generate_r1cs_witness_from_packed()
+    jmp.generate_r1cs_witness()
+    assert pb.is_satisfied() == True
