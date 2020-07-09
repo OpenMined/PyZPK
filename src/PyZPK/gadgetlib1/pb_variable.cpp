@@ -12,7 +12,7 @@ void declare_pb_variable(py::module &m)
 {
     using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
 
-    py::class_<pb_variable<FieldT>>(m, "pb_variable")
+    py::class_<pb_variable<FieldT>, variable<FieldT>>(m, "pb_variable")
         .def(py::init<const var_index_t>())
         .def("allocate", &pb_variable<FieldT>::allocate, py::arg("protoboard"), py::arg("annotation"));
 }
@@ -38,7 +38,7 @@ void declare_pb_linear_combination(py::module &m)
 {
     using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
 
-    py::class_<pb_linear_combination<FieldT>>(m, "pb_linear_combination")
+    py::class_<pb_linear_combination<FieldT>, linear_combination<FieldT>>(m, "pb_linear_combination")
         .def(py::init<>())
         .def(py::init<const pb_variable<FieldT> &>())
         .def("assign", &pb_linear_combination<FieldT>::assign, py::arg("protoboard"), py::arg("linear_combination"))
