@@ -37,7 +37,6 @@ jobs:
         pip3 install -r requirements_dev.txt
         chmod 557 ext_source_setup.sh
         ./ext_source_setup.sh
-        python3 setup.py install
     - name: Lint, format, and type-check
       run: |
         pip3 install flake8
