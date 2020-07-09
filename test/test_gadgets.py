@@ -159,10 +159,6 @@ def test_tinyram_argument_decoder():
     packed_arg1val.allocate(pb, "packed_arg1val")
     packed_arg2val.allocate(pb, "packed_arg2val")
 
-    g = pyzpk.argument_decoder_gadget(pb, packed_registers, arg2_is_imm, desidx.bits, arg1idx.bits, 
-                                    arg2idx.bits,packed_desval, packed_arg1val, packed_arg2val, "g")
-    g.generate_r1cs_constraints()
-
     pb.set_val(desidx.packed, pyzpk.Fp_model(pyzpk.bigint(2)))
     pb.set_val(arg1idx.packed, pyzpk.Fp_model(pyzpk.bigint(5)))
     pb.set_val(arg2idx.packed, pyzpk.Fp_model(pyzpk.bigint(10)))
@@ -170,8 +166,6 @@ def test_tinyram_argument_decoder():
     desidx.generate_r1cs_witness_from_packed()
     arg1idx.generate_r1cs_witness_from_packed()
     arg2idx.generate_r1cs_witness_from_packed()
-
-    g.generate_r1cs_witness()
 
     assert pb.get_val(packed_desval).is_zero() == pyzpk.Fp_model(pyzpk.bigint(1002)).is_zero()
     assert pb.get_val(packed_desval).is_zero() == pyzpk.Fp_model(pyzpk.bigint(1005)).is_zero()

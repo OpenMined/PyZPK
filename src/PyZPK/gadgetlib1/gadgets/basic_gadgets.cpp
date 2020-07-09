@@ -82,7 +82,6 @@ void declare_dual_variable_gadget(py::module &m)
                       const size_t,
                       const std::string &>())
         .def_readwrite("packed", &dual_variable_gadget<FieldT>::packed)
-        .def_readwrite("bits", &dual_variable_gadget<FieldT>::bits)
         .def("generate_r1cs_constraints", &dual_variable_gadget<FieldT>::generate_r1cs_constraints, py::arg("enforce_bitness"))
         .def("generate_r1cs_witness_from_packed", &dual_variable_gadget<FieldT>::generate_r1cs_witness_from_packed)
         .def("generate_r1cs_witness_from_bits", &dual_variable_gadget<FieldT>::generate_r1cs_witness_from_bits);
