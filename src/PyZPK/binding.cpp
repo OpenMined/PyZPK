@@ -44,6 +44,7 @@ void init_gadgetlib1_tinyram_consistency_enforcer_gadget(py::module &);
 void init_gadgetlib1_tinyram_memory_masking_gadget(py::module &);
 void init_gadgetlib1_curves_weierstrass_g1_gadget(py::module &);
 void init_gadgetlib1_curves_weierstrass_g2_gadget(py::module &);
+void init_gadgetlib1_hashes_hash_io(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -92,4 +93,5 @@ PYBIND11_MODULE(pyzpk, m)
     init_gadgetlib1_tinyram_memory_masking_gadget(m);
     init_gadgetlib1_curves_weierstrass_g1_gadget(m);
     init_gadgetlib1_curves_weierstrass_g2_gadget(m);
+    init_gadgetlib1_hashes_hash_io(m);
 }
