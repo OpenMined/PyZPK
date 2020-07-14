@@ -17,8 +17,6 @@ void declare_sha256_message_schedule_gadget(py::module &m)
     m.attr("SHA256_digest_size") = 256;
     m.attr("SHA256_block_size") = 512;
 
-    m.def("SHA256_default_IV", &SHA256_default_IV<FieldT>);
-
     py::class_<sha256_message_schedule_gadget<FieldT>, gadget<FieldT>>(m, "sha256_message_schedule_gadget")
         .def(py::init<protoboard<FieldT> &,
                       const pb_variable_array<FieldT> &,
