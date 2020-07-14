@@ -171,3 +171,39 @@ def test_tinyram_argument_decoder():
     assert pb.get_val(packed_desval).is_zero() == pyzpk.Fp_model(pyzpk.bigint(1005)).is_zero()
     assert pb.get_val(packed_desval).is_zero() == pyzpk.Fp_model(pyzpk.bigint(1007)).is_zero()
     assert pb.is_satisfied() == True
+    
+def test_knapsack_gadgets():
+    dimension = 1
+    input_bits = [1,1,0,0,1,0,1,0,0,1]
+    digest_bits = [1,1,1,1,0,0,1,0,1,0,0,0,1,1,0,0,1,1,1,0,0,0,1,0,1,1,1,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,1,1,1,1,1,1,1,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0,1,1,1,1,0,1,0,0,0,0,0,1,0,1,1,0,0,0,1,0,1,0,0,0,1,0,1,1,0,0,1,1,1,1,0,0,1,1,0,0,1,0,0,0,0,0,1,1,1,0,1,1,1,0,0,0,1,0,1,0,1,1,0,0,0,1,1,1,0,0,1,1,0,1,1,0,1,0,1,1,0,1,1,0,0,0,0,1,1,1,1,1,1,1,0,1,0,1,0,0,0,0,0,1,1,1,1,0,0,0,1,0,0,1,1,1,0,0,0,1,1,1,1,1,1,0,1,0,1,0,0,1,1,0,0,1,1,1,1,0,0,0,1,0,0,0,0,1,0,1,0,1,0,0,1,0,0,1,1,0,1,1,1,1,0,0,1,1,0,0,1,1,0,1,0,1,1,0,1,1,1,0,0,1,1,1,1,1,0,1,0,0,0,1,0,0,1,1,1,0,1,1,0,1,1,0,0,1,1,0,0,0,0,0,1,0,1,1,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0]
+
+    assert pyzpk.knapsack_dimension.dimension == dimension
+
+    pb = pyzpk.protoboard()
+
+    input_block = pyzpk.block_variable(pb, len(input_bits) , "input_block")
+    digest_len = pyzpk.knapsack_CRH_with_bit_out_gadget.get_digest_len()
+    output_digest = pyzpk.digest_variable(pb, digest_len, "output_digest")
+    input_block.generate_r1cs_witness(input_bits);
+
+    assert pb.is_satisfied() == True
+    
+def test_sha256_gadgets():
+    pb = pyzpk.protoboard()
+    left = pyzpk.digest_variable(pb,pyzpk.SHA256_digest_size, "left")
+    right = pyzpk.digest_variable(pb,pyzpk.SHA256_digest_size, "right")
+    output = pyzpk.digest_variable(pb,pyzpk.SHA256_digest_size, "output")
+    f = pyzpk.sha256_two_to_one_hash_gadget(pb, left, right, output, "f")
+    f.generate_r1cs_constraints(True)
+
+    # Number of constraints for sha256_two_to_one_hash_gadget
+    assert pb.num_constraints() == 27280
+
+    left_bv = [0x426bc2d8, 0x4dc86782, 0x81e8957a, 0x409ec148, 0xe6cffbe8, 0xafe6ba4f, 0x9c6f1978, 0xdd7af7e9]
+    right_bv = [0x038cce42, 0xabd366b8, 0x3ede7e00, 0x9130de53, 0x72cdf73d, 0xee825114, 0x8cb48d1b, 0x9af68ad0]
+    hash_bv = [0xeffd0b7f, 0x1ccba116, 0x2ee816f7, 0x31c62b48, 0x59305141, 0x990e5c0a, 0xce40d33d, 0x0b1167d1]
+    left.generate_r1cs_witness(left_bv)
+    right.generate_r1cs_witness(right_bv)
+    f.generate_r1cs_witness()
+    output.generate_r1cs_witness(hash_bv)
+    assert pb.is_satisfied() == True
