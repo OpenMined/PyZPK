@@ -49,6 +49,7 @@ void init_gadgetlib1_hashes_digest_selector_gadget(py::module &);
 void init_gadgetlib1_hashes_knapsack_gadget(py::module &);
 void init_gadgetlib1_hashes_sha256_aux_gadget(py::module &);
 void init_gadgetlib1_hashes_sha256_components(py::module &);
+void init_gadgetlib1_hashes_sha256_gadget(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -102,4 +103,5 @@ PYBIND11_MODULE(pyzpk, m)
     init_gadgetlib1_hashes_knapsack_gadget(m);
     init_gadgetlib1_hashes_sha256_aux_gadget(m);
     init_gadgetlib1_hashes_sha256_components(m);
+    init_gadgetlib1_hashes_sha256_gadget(m);
 }
