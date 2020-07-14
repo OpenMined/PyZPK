@@ -171,3 +171,20 @@ def test_tinyram_argument_decoder():
     assert pb.get_val(packed_desval).is_zero() == pyzpk.Fp_model(pyzpk.bigint(1005)).is_zero()
     assert pb.get_val(packed_desval).is_zero() == pyzpk.Fp_model(pyzpk.bigint(1007)).is_zero()
     assert pb.is_satisfied() == True
+    
+def test_knapsack_gadgets():
+    dimension = 1
+    input_bits = [1,1,0,0,1,0,1,0,0,1]
+    digest_bits = [1,1,1,1,0,0,1,0,1,0,0,0,1,1,0,0,1,1,1,0,0,0,1,0,1,1,1,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,1,1,1,1,1,1,1,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0,1,1,1,1,0,1,0,0,0,0,0,1,0,1,1,0,0,0,1,0,1,0,0,0,1,0,1,1,0,0,1,1,1,1,0,0,1,1,0,0,1,0,0,0,0,0,1,1,1,0,1,1,1,0,0,0,1,0,1,0,1,1,0,0,0,1,1,1,0,0,1,1,0,1,1,0,1,0,1,1,0,1,1,0,0,0,0,1,1,1,1,1,1,1,0,1,0,1,0,0,0,0,0,1,1,1,1,0,0,0,1,0,0,1,1,1,0,0,0,1,1,1,1,1,1,0,1,0,1,0,0,1,1,0,0,1,1,1,1,0,0,0,1,0,0,0,0,1,0,1,0,1,0,0,1,0,0,1,1,0,1,1,1,1,0,0,1,1,0,0,1,1,0,1,0,1,1,0,1,1,1,0,0,1,1,1,1,1,0,1,0,0,0,1,0,0,1,1,1,0,1,1,0,1,1,0,0,1,1,0,0,0,0,0,1,0,1,1,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0]
+
+    assert pyzpk.knapsack_dimension.dimension == dimension
+
+    pb = pyzpk.protoboard()
+
+    input_block = pyzpk.block_variable(pb, len(input_bits) , "input_block")
+    digest_len = pyzpk.knapsack_CRH_with_bit_out_gadget.get_digest_len()
+    output_digest = pyzpk.digest_variable(pb, digest_len, "output_digest")
+    input_block.generate_r1cs_witness(input_bits);
+
+    assert pb.is_satisfied() == True
+    
