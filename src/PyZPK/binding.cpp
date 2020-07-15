@@ -51,6 +51,8 @@ void init_gadgetlib1_hashes_sha256_aux_gadget(py::module &);
 void init_gadgetlib1_hashes_sha256_components(py::module &);
 void init_gadgetlib1_hashes_sha256_gadget(py::module &);
 void init_merkle_authentication_path_variable(py::module &);
+void init_merkle_tree_check_read_gadget(py::module &);
+void init_merkle_tree_check_update_gadget(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -106,4 +108,6 @@ PYBIND11_MODULE(pyzpk, m)
     init_gadgetlib1_hashes_sha256_components(m);
     init_gadgetlib1_hashes_sha256_gadget(m);
     init_merkle_authentication_path_variable(m);
+    init_merkle_tree_check_read_gadget(m);
+    init_merkle_tree_check_update_gadget(m);
 }
