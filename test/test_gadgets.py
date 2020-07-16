@@ -1,5 +1,8 @@
+import random
 import pytest
 import pyzpk
+import math
+RAND_MAX = 32767
 
 def test_bacs():
     new_num_constraints = 101
@@ -206,4 +209,61 @@ def test_sha256_gadgets():
     right.generate_r1cs_witness(right_bv)
     f.generate_r1cs_witness()
     output.generate_r1cs_witness(hash_bv)
+    assert pb.is_satisfied() == True
+
+def test_merkle_tree():
+    digest_len = 298
+    tree_depth = 16
+    prev_path = []
+    prev_load_hash = []
+    prev_store_hash = []
+    for i in range(digest_len):
+        prev_load_hash.append(random.randint(0, RAND_MAX) % 2)
+        prev_store_hash.append(random.randint(0, RAND_MAX) % 2)
+    for i in range(tree_depth):
+        prev_path.append(random.randint(0, RAND_MAX) % 2)
+
+    address = 0
+    address_bits = []
+    while tree_depth > 0:
+        level = tree_depth - 1
+        computed_is_right = random.randint(0, RAND_MAX) % 2
+
+        address |= 1 << (tree_depth-1-level) if computed_is_right == 1 else 0
+        address_bits.append(computed_is_right)
+        other = []
+        for i in range(digest_len):
+            other.append(random.randint(0, RAND_MAX) % 2)
+
+        prev_path[level] = other
+
+        tree_depth -= 1
+
+    tree_depth = 16
+    pb = pyzpk.protoboard()
+    address_bits_va = pyzpk.pb_variable_array()
+    address_bits_va.allocate(pb, tree_depth, "address_bits")
+
+    prev_leaf_digest = pyzpk.digest_variable(pb, digest_len, "prev_leaf_digest")
+    prev_root_digest = pyzpk.digest_variable(pb, digest_len, "prev_root_digest")
+    prev_path_var = pyzpk.merkle_authentication_path_variable(
+        pb, tree_depth, "prev_path_var")
+
+    next_leaf_digest = pyzpk.digest_variable(pb, digest_len, "next_leaf_digest")
+    next_root_digest = pyzpk.digest_variable(pb, digest_len, "next_root_digest")
+    next_path_var = pyzpk.merkle_authentication_path_variable(
+        pb, tree_depth, "next_path_var")
+
+    prev_path_var.generate_r1cs_constraints()
+    address_bits_va.fill_with_bits(pb, address_bits)
+    assert address_bits_va.get_field_element_from_bits(pb).as_ulong() == 0
+    prev_leaf_digest.generate_r1cs_witness(prev_load_hash)
+    next_leaf_digest.generate_r1cs_witness(prev_store_hash)
+    address_bits_va.fill_with_bits(pb, address_bits)
+
+    prev_leaf_digest.generate_r1cs_witness(prev_load_hash)
+    next_leaf_digest.generate_r1cs_witness(prev_store_hash)
+    prev_root_digest.generate_r1cs_witness(prev_load_hash)
+    next_root_digest.generate_r1cs_witness(prev_store_hash)
+    address_bits_va.fill_with_bits(pb, address_bits)
     assert pb.is_satisfied() == True
