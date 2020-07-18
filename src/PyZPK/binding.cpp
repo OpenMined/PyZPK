@@ -1,7 +1,7 @@
 #include <pybind11/pybind11.h>
 namespace py = pybind11;
 
-void init_utils_Fp_model(py::module &);
+void init_utils(py::module &);
 void init_data_structures_integer_permutation(py::module &);
 void init_data_structures_set_commitment(py::module &);
 void init_algorithms_benes(py::module &);
@@ -53,12 +53,16 @@ void init_gadgetlib1_hashes_sha256_gadget(py::module &);
 void init_merkle_authentication_path_variable(py::module &);
 void init_merkle_tree_check_read_gadget(py::module &);
 void init_merkle_tree_check_update_gadget(py::module &);
+void init_gadgetlib1_pairing_weierstrass_final_exponentiation(py::module &);
+void init_gadgetlib1_pairing_weierstrass_miller_loop(py::module &);
+void init_gadgetlib1_pairing_weierstrass_precomputation(py::module &);
+void init_gadgetlib1_pairing_pairing_checks(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
     m.doc() = "Python wrapper for open source Zero Proof Knowledge Library";
 
-    init_utils_Fp_model(m);
+    init_utils(m);
     init_data_structures_integer_permutation(m);
     init_data_structures_set_commitment(m);
     init_algorithms_benes(m);
@@ -110,4 +114,8 @@ PYBIND11_MODULE(pyzpk, m)
     init_merkle_authentication_path_variable(m);
     init_merkle_tree_check_read_gadget(m);
     init_merkle_tree_check_update_gadget(m);
+    init_gadgetlib1_pairing_weierstrass_final_exponentiation(m);
+    init_gadgetlib1_pairing_weierstrass_miller_loop(m);
+    init_gadgetlib1_pairing_weierstrass_precomputation(m);
+    init_gadgetlib1_pairing_pairing_checks(m);
 }

@@ -267,3 +267,72 @@ def test_merkle_tree():
     next_root_digest.generate_r1cs_witness(prev_store_hash)
     address_bits_va.fill_with_bits(pb, address_bits)
     assert pb.is_satisfied() == True
+
+def test_mnt_miller_loop():
+    pb = pyzpk.protoboard()
+    P_val = pyzpk.mnt4_G1.one()
+    Q_val = pyzpk.mnt4_G2.one()
+
+    P = pyzpk.G1_variable(pb, "P")
+    Q = pyzpk.G2_variable(pb, "Q")
+    prec_P = pyzpk.G1_precomputation()
+    prec_Q = pyzpk.G2_precomputation()
+    compute_prec_P = pyzpk.precompute_G1_gadget(pb, P, prec_P, "prec_P")
+    compute_prec_Q = pyzpk.precompute_G2_gadget(pb, Q, prec_Q, "prec_Q")
+    compute_prec_P.generate_r1cs_constraints()
+    compute_prec_Q.generate_r1cs_constraints()
+
+    P.generate_r1cs_witness(P_val)
+    compute_prec_P.generate_r1cs_witness()
+    Q.generate_r1cs_witness(Q_val)
+    compute_prec_Q.generate_r1cs_witness()
+    assert pb.is_satisfied() == True
+    
+def test_mnt_e_over_e_miller_loop():
+    pb = pyzpk.protoboard()
+    P1_val = pyzpk.mnt4_G1.one()
+    Q1_val = pyzpk.mnt4_G2.one()
+    P2_val = pyzpk.mnt4_G1.one()
+    Q2_val = pyzpk.mnt4_G2.one()
+
+    P1 = pyzpk.G1_variable(pb, "P1")
+    Q1 = pyzpk.G2_variable(pb, "Q1")
+    P2 = pyzpk.G1_variable(pb, "P2")
+    Q2 = pyzpk.G2_variable(pb, "Q2")
+
+    prec_P1 = pyzpk.G1_precomputation()
+    prec_Q1 = pyzpk.G2_precomputation()
+    prec_P2 = pyzpk.G1_precomputation()
+    prec_Q2 = pyzpk.G2_precomputation()
+
+    compute_prec_P1 = pyzpk.precompute_G1_gadget(pb, P1, prec_P1, "prec_P1")
+    compute_prec_Q1 = pyzpk.precompute_G2_gadget(pb, Q1, prec_Q1, "prec_Q1")
+    compute_prec_P2 = pyzpk.precompute_G1_gadget(pb, P2, prec_P2, "prec_P2")
+    compute_prec_Q2 = pyzpk.precompute_G2_gadget(pb, Q2, prec_Q2, "prec_Q2")
+    
+    compute_prec_P1.generate_r1cs_constraints()
+    compute_prec_Q1.generate_r1cs_constraints()
+    compute_prec_P2.generate_r1cs_constraints()
+    compute_prec_Q2.generate_r1cs_constraints()
+
+    P1.generate_r1cs_witness(P1_val)
+    compute_prec_P1.generate_r1cs_witness()
+    Q1.generate_r1cs_witness(Q1_val)
+    compute_prec_Q1.generate_r1cs_witness()    
+    P2.generate_r1cs_witness(P2_val)
+    compute_prec_P2.generate_r1cs_witness()
+    Q2.generate_r1cs_witness(Q2_val)
+    compute_prec_Q2.generate_r1cs_witness()
+    
+    assert pb.is_satisfied() == True
+    
+def test_G1_variable_precomp():
+    pb = pyzpk.protoboard()
+    g_val = pyzpk.mnt4_G1.one()
+    g = pyzpk.G1_variable(pb, "g")
+    precomp = pyzpk.G1_precomputation()
+    do_precomp = pyzpk.precompute_G1_gadget(pb, g, precomp, "do_precomp")
+    do_precomp.generate_r1cs_constraints()
+    g.generate_r1cs_witness(g_val)
+    do_precomp.generate_r1cs_witness()
+    assert pb.is_satisfied() == True

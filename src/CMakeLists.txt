@@ -1,6 +1,6 @@
 set(
   SRC
-  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/utils/Fp_model.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/utils/utils.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/data_structures/integer_permutation.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/data_structures/set_commitment.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/routing_algorithms/benes_routing_algorithm.cpp"
@@ -52,6 +52,10 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/merkle_tree/merkle_authentication_path_variable.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/merkle_tree/merkle_tree_check_read_gadget.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/merkle_tree/merkle_tree_check_update_gadget.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/pairing/weierstrass_final_exponentiation.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/pairing/weierstrass_miller_loop.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/pairing/weierstrass_precomputation.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/pairing/pairing_checks.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 
