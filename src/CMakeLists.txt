@@ -1,6 +1,6 @@
 set(
   SRC
-  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/utils/Fp_model.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/utils/utils.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/data_structures/integer_permutation.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/data_structures/set_commitment.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/routing_algorithms/benes_routing_algorithm.cpp"

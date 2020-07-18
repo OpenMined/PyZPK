@@ -1,7 +1,7 @@
 #include <pybind11/pybind11.h>
 namespace py = pybind11;
 
-void init_utils_Fp_model(py::module &);
+void init_utils(py::module &);
 void init_data_structures_integer_permutation(py::module &);
 void init_data_structures_set_commitment(py::module &);
 void init_algorithms_benes(py::module &);
@@ -62,7 +62,7 @@ PYBIND11_MODULE(pyzpk, m)
 {
     m.doc() = "Python wrapper for open source Zero Proof Knowledge Library";
 
-    init_utils_Fp_model(m);
+    init_utils(m);
     init_data_structures_integer_permutation(m);
     init_data_structures_set_commitment(m);
     init_algorithms_benes(m);

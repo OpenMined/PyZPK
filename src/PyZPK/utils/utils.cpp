@@ -26,6 +26,9 @@
 #include <libff/common/profiling.hpp>
 #include <libff/common/utils.hpp>
 #include <libff/common/serialization.hpp>
+#include <libff/algebra/curves/mnt/mnt6/mnt6_g2.hpp>
+#include <libff/algebra/curves/mnt/mnt4/mnt4_g1.hpp>
+#include <libff/algebra/curves/mnt/mnt4/mnt4_g2.hpp>
 #include <gmp.h>
 
 using namespace std;
@@ -33,7 +36,7 @@ namespace py = pybind11;
 using namespace libff;
 
 // Used as FieldT class type
-void init_utils_Fp_model(py::module &m)
+void declare_utils_Fp_model(py::module &m)
 {
     // bigint wrapper class around GMP's MPZ long integers.
     py::class_<bigint<5l>>(m, "bigint")
@@ -73,5 +76,26 @@ void init_utils_Fp_model(py::module &m)
         .def("as_ulong", &Fp_model<5l, libff::mnt46_modulus_B>::as_ulong)
         .def(py::self * py::self)
         .def(py::self *= py::self)
-        .def(-py::self);  
+        .def(-py::self);
+}
+
+void declare_G1(py::module &m)
+{
+    py::class_<mnt4_G1>(m, "mnt4_G1")
+        .def(py::init<>())
+        .def_static("one", &mnt4_G1::one);
+}
+
+void declare_G2(py::module &m)
+{
+    py::class_<mnt4_G2>(m, "mnt4_G2")
+        .def(py::init<>())
+        .def_static("one", &mnt4_G2::one);
+}
+
+void init_utils(py::module &m)
+{
+    declare_utils_Fp_model(m);
+    declare_G1(m);
+    declare_G2(m);
 }
