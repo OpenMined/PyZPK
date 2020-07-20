@@ -336,3 +336,8 @@ def test_G1_variable_precomp():
     g.generate_r1cs_witness(g_val)
     do_precomp.generate_r1cs_witness()
     assert pb.is_satisfied() == True
+    
+def test_routing_gadgets():
+    pyzpk.profile_num_switches(1)
+    ## Prints out profiling number of switches in arbitrary size networks (and rounded-up for Benes)
+    
