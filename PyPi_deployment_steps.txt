@@ -1,0 +1,17 @@
+Upload your package to PyPi
+
+1. First, open the command prompt and navigate into your the folder where you have all your files and your package located:
+cd "C://PATH//TO//YOUR//FOLDER"
+
+2. Now, you have to create a source distribution with the following command:
+`python setup.py sdist`
+
+3. Now, you will need twine for the upload process, so first install twine via pip:
+`pip3 install twine`
+
+4. Then, run the following command:
+`twine upload --repository-url https://test.pypi.org/legacy/ dist/*`
+
+5. You will be asked to provide your username and password. Provide the credentials you used to register to PyPi earlier.
+
+6. Congratulations, your package is now uploaded! Visit https://pypi.org/project/PyZKP/ to see your package online!
