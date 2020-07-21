@@ -59,6 +59,8 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/routing/as_waksman_routing_gadget.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/routing/benes_routing_gadget.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/routing/profile_routing_gadgets.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/set_commitment/set_commitment_gadget.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/set_commitment/set_membership_proof_variable.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 

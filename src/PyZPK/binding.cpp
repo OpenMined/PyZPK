@@ -60,6 +60,8 @@ void init_gadgetlib1_pairing_pairing_checks(py::module &);
 void init_gadgetlib1_routing_as_waksman_routing_gadget(py::module &);
 void init_gadgetlib1_routing_benes_routing_gadget(py::module &);
 void init_gadgetlib1_routing_profile_routing_gadgets(py::module &);
+void init_set_commitment_gadget(py::module &);
+void init_set_membership_proof_variable(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -124,4 +126,6 @@ PYBIND11_MODULE(pyzpk, m)
     init_gadgetlib1_routing_as_waksman_routing_gadget(m);
     init_gadgetlib1_routing_benes_routing_gadget(m);
     init_gadgetlib1_routing_profile_routing_gadgets(m);
+    init_set_commitment_gadget(m);
+    init_set_membership_proof_variable(m);
 }
