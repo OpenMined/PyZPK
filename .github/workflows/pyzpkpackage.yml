@@ -1,4 +1,4 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# This workflow will install Python dependencies, run tests, lint with a variety of Python versions and build Sphinx documentation.
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
 name: PyZPK CI
@@ -43,7 +43,7 @@ jobs:
       - name: Building Library
         run: |
           chmod 557 build.sh
-          ./build.sh 
+          ./build.sh
       - name: Scan for security issues
         run: |
           bandit -r syft -ll
@@ -51,3 +51,9 @@ jobs:
         run: |
           cp build/src/*.so test
           coverage run -m pytest test
+      - name: Build docs
+        run: |
+          cd docs/ && sphinx-build -b html ./source ./build/
+      - persist_to_workspace:
+        root: docs/_build
+        paths: html
