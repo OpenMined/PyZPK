@@ -18,7 +18,6 @@ void init_set_membership_proof_variable(py::module &m)
         .def(py::init<protoboard<FieldT> &,
                       const size_t,
                       const std::string &>())
-        .def_readwrite("address_bits", &set_membership_proof_variable<FieldT, HashT>::address_bits)
         .def_readwrite("merkle_path", &set_membership_proof_variable<FieldT, HashT>::merkle_path)
         .def_readonly("max_entries", &set_membership_proof_variable<FieldT, HashT>::max_entries)
         .def_readonly("tree_depth", &set_membership_proof_variable<FieldT, HashT>::tree_depth)
