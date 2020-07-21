@@ -341,3 +341,30 @@ def test_routing_gadgets():
     pyzpk.profile_num_switches(1)
     ## Prints out profiling number of switches in arbitrary size networks (and rounded-up for Benes)
     
+def test_set_commitment_gadgets():
+    pb = pyzpk.protoboard()
+    digest_len = pyzpk.knapsack_CRH_with_field_out_gadget.get_digest_len()
+    max_set_size = 16
+    value_size = pyzpk.knapsack_CRH_with_field_out_gadget.get_digest_len() if pyzpk.knapsack_CRH_with_field_out_gadget.get_block_len() > 0 else 10
+    accumulator = pyzpk.set_commitment_accumulator
+
+    set_elems = []
+    for i in range(max_set_size):
+        elem = []
+        for i in range(value_size):
+            elem.append(random.randint(0, RAND_MAX) % 2)
+        set_elems.append(elem)
+        
+    element_bits = pyzpk.pb_variable_array()
+    element_bits.allocate(pb, value_size, "element_bits")
+    root_digest = pyzpk.digest_variable(pb, digest_len, "root_digest")
+    check_succesful = pyzpk.pb_variable(0)
+    check_succesful.allocate(pb, "check_succesful")
+    proof = pyzpk.set_membership_proof_variable(pb, max_set_size, "proof")
+    for i in range(max_set_size):
+        element_bits.fill_with_bits(pb, set_elems[i])
+        pb.set_val(check_succesful, pyzpk.Fp_model.one())
+        assert pb.is_satisfied() == True
+
+    pb.set_val(check_succesful, pyzpk.Fp_model.zero())
+    assert pb.is_satisfied() == True
