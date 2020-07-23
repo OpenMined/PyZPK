@@ -368,3 +368,23 @@ def test_set_commitment_gadgets():
 
     pb.set_val(check_succesful, pyzpk.Fp_model.zero())
     assert pb.is_satisfied() == True
+    
+def test_verifiers_gadgets():
+    FieldT_A = pyzpk.Fp_model()
+    FieldT_B = pyzpk.Fp_model()
+    num_constraints = 50
+    primary_input_size = 3
+
+    elt_size = pyzpk.Fp_model.size_in_bits()
+    primary_input_size_in_bits = elt_size * primary_input_size
+    vk_size_in_bits = pyzpk.r1cs_ppzksnark_verification_key_variable.size_in_bits(primary_input_size)
+
+    pb = pyzpk.protoboard()
+    vk_bits = pyzpk.pb_variable_array()
+    vk_bits.allocate(pb, vk_size_in_bits, "vk_bits")
+
+    primary_input_bits = pyzpk.pb_variable_array()
+    primary_input_bits.allocate(pb, primary_input_size_in_bits, "primary_input_bits")
+
+    proof = pyzpk.r1cs_ppzksnark_proof_variable(pb, "proof")
+    assert pb.is_satisfied() == True

@@ -45,6 +45,7 @@ void declare_r1cs_ppzksnark_verification_key_variable(py::module &m)
         .def("generate_r1cs_witness", py::overload_cast<const r1cs_ppzksnark_verification_key<other_curve<ppT>> &>(&r1cs_ppzksnark_verification_key_variable<ppT>::generate_r1cs_witness), py::arg("vk"))
         .def("generate_r1cs_witness", py::overload_cast<const libff::bit_vector &>(&r1cs_ppzksnark_verification_key_variable<ppT>::generate_r1cs_witness), py::arg("vk"))
         .def("get_bits", &r1cs_ppzksnark_verification_key_variable<ppT>::get_bits)
+        .def_static("size_in_bits", &r1cs_ppzksnark_verification_key_variable<ppT>::size_in_bits)
         .def_static("get_verification_key_bits", &r1cs_ppzksnark_verification_key_variable<ppT>::get_verification_key_bits);
 }
 
