@@ -61,6 +61,7 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/routing/profile_routing_gadgets.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/set_commitment/set_commitment_gadget.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/set_commitment/set_membership_proof_variable.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib1/gadgets/verifiers/r1cs_ppzksnark_verifier_gadget.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 
