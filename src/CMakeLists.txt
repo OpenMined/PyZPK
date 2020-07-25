@@ -65,6 +65,7 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib2/infrastructure.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib2/pp.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib2/variable.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib2/constraint.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 

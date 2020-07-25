@@ -66,6 +66,7 @@ void init_gadgetlib1_verifiers_r1cs_ppzksnark_verifier_gadget(py::module &);
 void init_gadgetlib2_infrastructure(py::module &);
 void init_gadgetlib2_pp(py::module &);
 void init_gadgetlib2_variable(py::module &);
+void init_gadgetlib2_constraint(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -136,4 +137,5 @@ PYBIND11_MODULE(pyzpk, m)
     init_gadgetlib2_infrastructure(m);
     init_gadgetlib2_pp(m);
     init_gadgetlib2_variable(m);
+    init_gadgetlib2_constraint(m);
 }
