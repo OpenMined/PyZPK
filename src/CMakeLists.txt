@@ -68,6 +68,7 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib2/constraint.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib2/protoboard.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib2/integration.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib2/gadget.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 
