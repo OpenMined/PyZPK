@@ -388,3 +388,46 @@ def test_verifiers_gadgets():
 
     proof = pyzpk.r1cs_ppzksnark_proof_variable(pb, "proof")
     assert pb.is_satisfied() == True
+    
+def test_gadgetlib2_FElem_FConst_fromInt():
+    pyzpk.initPublicParamsFromDefaultPp()
+    e1 = pyzpk.FElem(1)
+    assert e1 == 1
+
+def test_gadgetlib2_FElem_FConst_fromstring():
+    pyzpk.initPublicParamsFromDefaultPp()
+    v1 = pyzpk.Variable("")
+    assert v1.name() == ""
+    
+    v2 = pyzpk.Variable("foo")
+    assert v2.name() == "foo"
+
+def test_gadgetlib2_FElem_FConst_copy():
+    pyzpk.initPublicParamsFromDefaultPp()
+    e0 = pyzpk.FElem(0)
+    e1 = pyzpk.FElem(1)
+    e3 = pyzpk.FElem(e1)
+    e3 = 0
+    assert e3 == 0
+    assert e1 == 1
+    e0 = e1
+    assert e0 == e1
+
+def test_gadgetlib2_FElem_FConst_assignment():
+    pyzpk.initPublicParamsFromDefaultPp()
+    e1 = pyzpk.FElem(0)
+    e0 = e1 = 42
+    assert e1 == e1
+
+def test_gadgetlib2_FElem_R1P_Elem_operatorPlus():
+    e1 = pyzpk.FElem(6)
+    e2 = pyzpk.FElem(6)
+    e3 = pyzpk.FElem(3)
+    e1 = e2 
+    e1 = e1 + e3
+    e2 = e2 + e3
+    assert int(e1.asString()) == 9
+    assert int(e2.asString()) == 9
+    assert int(e3.asString()) == 3
+    
+    

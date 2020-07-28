@@ -29,6 +29,8 @@
 #include <libff/algebra/curves/mnt/mnt6/mnt6_g2.hpp>
 #include <libff/algebra/curves/mnt/mnt4/mnt4_g1.hpp>
 #include <libff/algebra/curves/mnt/mnt4/mnt4_g2.hpp>
+#include <libff/algebra/curves/alt_bn128/alt_bn128_pp.hpp>
+#include <libff/algebra/curves/alt_bn128/alt_bn128_init.hpp>
 #include <gmp.h>
 
 using namespace std;
@@ -75,6 +77,39 @@ void declare_utils_Fp_model(py::module &m)
         .def_static("zero", &Fp_model<5l, libff::mnt46_modulus_B>::zero)
         .def_static("size_in_bits", &Fp_model<5l, libff::mnt46_modulus_B>::size_in_bits)
         .def("as_ulong", &Fp_model<5l, libff::mnt46_modulus_B>::as_ulong)
+        .def(py::self * py::self)
+        .def(py::self *= py::self)
+        .def(-py::self);
+
+
+        py::class_<Fp_model<4l, libff::alt_bn128_modulus_r>>(m, "Fp_model4bn")
+        .def(py::init<>())
+        .def(py::init<const bigint<4l> &>())
+        .def(py::init<const long, const bool>())
+        .def_readwrite("mont_repr", &Fp_model<4l, libff::alt_bn128_modulus_r>::mont_repr)
+        .def_static("random_element", []() {
+            Fp_model<5l, mnt46_modulus_B> r;
+            while (mpn_cmp(r.mont_repr.data, mnt46_modulus_B.data, 5l))
+            {
+                r.mont_repr.randomize();
+                size_t bitno = GMP_NUMB_BITS * 5 - 1;
+                while (mnt46_modulus_B.test_bit(bitno) == false)
+                {
+                    const size_t part = bitno / GMP_NUMB_BITS;
+                    const size_t bit = bitno - (GMP_NUMB_BITS * part);
+                    r.mont_repr.data[part] &= ~(1ul << bit);
+                    bitno--;
+                }
+            }
+            return r;
+        })
+        .def("inverse", &Fp_model<4l, libff::alt_bn128_modulus_r>::inverse)
+        .def("print", &Fp_model<4l, libff::alt_bn128_modulus_r>::print)
+        .def("is_zero", &Fp_model<4l, libff::alt_bn128_modulus_r>::is_zero)
+        .def_static("one", &Fp_model<4l, libff::alt_bn128_modulus_r>::one)
+        .def_static("zero", &Fp_model<4l, libff::alt_bn128_modulus_r>::zero)
+        .def_static("size_in_bits", &Fp_model<4l, libff::alt_bn128_modulus_r>::size_in_bits)
+        .def("as_ulong", &Fp_model<4l, libff::alt_bn128_modulus_r>::as_ulong)
         .def(py::self * py::self)
         .def(py::self *= py::self)
         .def(-py::self);

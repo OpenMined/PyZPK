@@ -70,6 +70,7 @@ void init_gadgetlib2_constraint(py::module &);
 void init_gadgetlib2_Protoboard(py::module &);
 void init_gadgetlib2_integration(py::module &);
 void init_gadgetlib2_gadget(py::module &);
+void init_gadgetlib2_adapters(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -144,4 +145,5 @@ PYBIND11_MODULE(pyzpk, m)
     init_gadgetlib2_Protoboard(m);
     init_gadgetlib2_integration(m);
     init_gadgetlib2_gadget(m);
+    init_gadgetlib2_adapters(m);
 }

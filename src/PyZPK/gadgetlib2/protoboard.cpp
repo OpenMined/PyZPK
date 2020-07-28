@@ -35,4 +35,6 @@ void init_gadgetlib2_Protoboard(py::module &m)
         .def("dualWordAssignmentEqualsValue", &Protoboard::dualWordAssignmentEqualsValue)
         .def("multipackedWordAssignmentEqualsValue", &Protoboard::multipackedWordAssignmentEqualsValue)
         .def("unpackedWordAssignmentEqualsValue", &Protoboard::unpackedWordAssignmentEqualsValue);
+
+        py::class_<ProtoboardParams>(m, "ProtoboardParams");
 }

@@ -3,6 +3,7 @@
 #include <pybind11/stl_bind.h>
 #include <pybind11/operators.h>
 #include <libsnark/gadgetlib2/variable.hpp>
+#include <vector>
 
 namespace py = pybind11;
 using namespace gadgetlib2;
@@ -44,6 +45,8 @@ void declare_FElem(py::module &m)
         .def(py::self += py::self)
         .def(py::self -= py::self)
         .def(py::self *= py::self)
+        .def(py::self + py::self)
+        .def(py::self - py::self)
         .def(-py::self)
         .def("inverse", &FElem::inverse)
         .def("asLong", &FElem::asLong)
@@ -77,20 +80,32 @@ void declare_R1P_Elem(py::module &m)
 
 void declare_Variable(py::module &m)
 {
+    py::enum_<FieldType>(m, "FieldType", py::arithmetic())
+        .value("R1P", R1P)
+        .value("AGNOSTIC", AGNOSTIC);
+
     py::class_<Variable>(m, "Variable")
         .def(py::init<const ::std::string &>())
         .def("name", &Variable::name)
-        .def("eval", &Variable::eval);
+        .def("eval", &Variable::eval)
+        .def(py::self * int())
+        .def(int() * py::self);
 }
 
 void declare_VariableArray(py::module &m)
 {
-    py::class_<VariableArray>(m, "VariableArray")
+    typedef ::std::vector<Variable> VariableArrayContents;
+    py::class_<VariableArrayContents>(m, "VariableArrayContents");
+
+    py::class_<VariableArray, VariableArrayContents>(m, "VariableArray")
         .def(py::init<const ::std::string &>())
         .def(py::init<const int, const ::std::string &>())
         .def(py::init<const size_t, const ::std::string &>())
         .def(py::init<const size_t, const Variable &>())
-        .def("name", &VariableArray::name);
+        .def("name", &VariableArray::name)
+        // .def(
+        //     "__getitem__", [](int i) { return VariableArray[i]})
+        ;
 }
 
 // Holds variables whose purpose is to be populated with the unpacked form of some word, bit by bit
@@ -148,6 +163,8 @@ void declare_LinearTerm(py::module &m)
         .def(py::init<const Variable &, long>())
         .def(-py::self)
         .def(py::self *= FElem())
+        .def(py::self + py::self)
+        .def(py::self + int())
         .def("fieldtype", &LinearTerm::fieldtype)
         .def("asString", &LinearTerm::asString)
         .def("eval", &LinearTerm::eval)
@@ -165,6 +182,7 @@ void declare_LinearCombination(py::module &m)
         .def(py::self += py::self)
         .def(py::self -= py::self)
         .def(py::self *= FElem())
+        .def(py::self + int())
         .def("eval", &LinearCombination::eval)
         .def("asString", &LinearCombination::asString)
         .def("getUsedVariables", &LinearCombination::getUsedVariables);
