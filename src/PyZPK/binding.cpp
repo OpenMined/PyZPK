@@ -63,6 +63,14 @@ void init_gadgetlib1_routing_profile_routing_gadgets(py::module &);
 void init_set_commitment_gadget(py::module &);
 void init_set_membership_proof_variable(py::module &);
 void init_gadgetlib1_verifiers_r1cs_ppzksnark_verifier_gadget(py::module &);
+void init_gadgetlib2_infrastructure(py::module &);
+void init_gadgetlib2_pp(py::module &);
+void init_gadgetlib2_variable(py::module &);
+void init_gadgetlib2_constraint(py::module &);
+void init_gadgetlib2_Protoboard(py::module &);
+void init_gadgetlib2_integration(py::module &);
+void init_gadgetlib2_gadget(py::module &);
+void init_gadgetlib2_adapters(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -130,4 +138,12 @@ PYBIND11_MODULE(pyzpk, m)
     init_set_commitment_gadget(m);
     init_set_membership_proof_variable(m);
     init_gadgetlib1_verifiers_r1cs_ppzksnark_verifier_gadget(m);
+    init_gadgetlib2_infrastructure(m);
+    init_gadgetlib2_pp(m);
+    init_gadgetlib2_variable(m);
+    init_gadgetlib2_constraint(m);
+    init_gadgetlib2_Protoboard(m);
+    init_gadgetlib2_integration(m);
+    init_gadgetlib2_gadget(m);
+    init_gadgetlib2_adapters(m);
 }
