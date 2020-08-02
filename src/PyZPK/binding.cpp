@@ -71,6 +71,8 @@ void init_gadgetlib2_Protoboard(py::module &);
 void init_gadgetlib2_integration(py::module &);
 void init_gadgetlib2_gadget(py::module &);
 void init_gadgetlib2_adapters(py::module &);
+void init_knowledge_commitment_knowledge_commitment(py::module &);
+void init_knowledge_commitment_kc_multiexp(py::module &);
 void init_zk_proof_systems_pcd_r1cs_pcd_compliance_predicate(py::module &);
 void init_zk_proof_systems_pcd_r1cs_pcd_cp_handler(py::module &);
 void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_pcd_params(py::module &);
@@ -151,6 +153,8 @@ PYBIND11_MODULE(pyzpk, m)
     init_gadgetlib2_integration(m);
     init_gadgetlib2_gadget(m);
     init_gadgetlib2_adapters(m);
+    init_knowledge_commitment_knowledge_commitment(m);
+    init_knowledge_commitment_kc_multiexp(m);
     init_zk_proof_systems_pcd_r1cs_pcd_compliance_predicate(m);
     init_zk_proof_systems_pcd_r1cs_pcd_cp_handler(m);
     init_zk_proof_systems_pcd_r1cs_pcd_r1cs_pcd_params(m);
