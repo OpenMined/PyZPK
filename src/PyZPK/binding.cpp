@@ -78,6 +78,7 @@ void init_zk_proof_systems_pcd_r1cs_pcd_cp_handler(py::module &);
 void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_pcd_params(py::module &);
 void init_zk_proof_systems_pcd_r1cs_pcd_tally_cp(py::module &);
 void init_zk_proof_systems_ppzksnark_r1cs_ppzksnark_r1cs_ppzksnark(py::module &);
+void init_zk_proof_systems_ppzksnark_r1cs_ppzksnark_run_r1cs_ppzksnark(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -160,4 +161,5 @@ PYBIND11_MODULE(pyzpk, m)
     init_zk_proof_systems_pcd_r1cs_pcd_r1cs_pcd_params(m);
     init_zk_proof_systems_pcd_r1cs_pcd_tally_cp(m);
     init_zk_proof_systems_ppzksnark_r1cs_ppzksnark_r1cs_ppzksnark(m);
+    init_zk_proof_systems_ppzksnark_r1cs_ppzksnark_run_r1cs_ppzksnark(m);
 }
