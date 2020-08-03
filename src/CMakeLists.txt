@@ -70,10 +70,14 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib2/integration.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib2/gadget.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/gadgetlib2/adapters.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/knowledge_commitment/knowledge_commitment.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/knowledge_commitment/kc_multiexp.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate/compliance_predicate.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate/cp_handler.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate/tally_cp.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/pcd/r1cs_pcd/r1cs_pcd_params.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/ppzksnark/r1cs_ppzksnark/r1cs_ppzksnark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/ppzksnark/r1cs_ppzksnark/run_r1cs_ppzksnark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 
