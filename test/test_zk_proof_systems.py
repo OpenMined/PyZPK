@@ -88,3 +88,35 @@ def test_r1cs_mp_ppzkpcd():
                     proofs.append(tree_proofs[max_arity*cur_idx + i + 1])   
         layer = layer - 1
         nodes_in_layer = nodes_in_layer//max_arity
+        
+def test_r1cs_sp_ppzkpcd():
+    max_arity = 2
+    depth = 2 #max_layer
+    wordsize = 32
+    test_serialization = True
+    all_accept = True
+    tree_size = 0
+    nodes_in_layer = 1
+    for layer in range(depth+2):
+        tree_size = tree_size + nodes_in_layer
+        nodes_in_layer = nodes_in_layer*max_arity
+
+    tree_elems = []
+    for i in range(tree_size + 1):
+        tree_elems.append(0)
+    for i in range(0, tree_size+1):
+        tree_elems[i] = random.randint(0, RAND_MAX) % 10
+
+    tree_proofs = []
+    tree_messages = []
+    for i in range(tree_size):
+        tree_proofs.append(0)
+        tree_messages.append(0)
+
+    type = 1
+    tally_accepted_types = {1,2}
+    test_same_type_optimization = True
+    tally = pyzpk.tally_cp_handler(type, max_arity, wordsize, test_same_type_optimization, tally_accepted_types)
+    tally.generate_r1cs_constraints()
+    tally_cp = tally.get_compliance_predicate()
+    nodes_in_layer =  nodes_in_layer//max_arity

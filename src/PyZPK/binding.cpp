@@ -82,6 +82,9 @@ void init_zk_proof_systems_ppzksnark_r1cs_ppzksnark_run_r1cs_ppzksnark(py::modul
 void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_mp_ppzkpcd_mp_pcd_circuits(py::module &);
 void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_mp_ppzkpcd_r1cs_mp_ppzkpcd(py::module &);
 void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_mp_ppzkpcd_run_r1cs_mp_ppzkpcd_tally_example(py::module &);
+void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_sp_ppzkpcd_r1cs_sp_ppzkpcd(py::module &);
+void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_sp_ppzkpcd_sp_pcd_circuits(py::module &);
+void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_sp_ppzkpcd_run_r1cs_sp_ppzkpcd(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -168,4 +171,7 @@ PYBIND11_MODULE(pyzpk, m)
     init_zk_proof_systems_pcd_r1cs_pcd_r1cs_mp_ppzkpcd_mp_pcd_circuits(m);
     init_zk_proof_systems_pcd_r1cs_pcd_r1cs_mp_ppzkpcd_r1cs_mp_ppzkpcd(m);
     init_zk_proof_systems_pcd_r1cs_pcd_r1cs_mp_ppzkpcd_run_r1cs_mp_ppzkpcd_tally_example(m);
+    init_zk_proof_systems_pcd_r1cs_pcd_r1cs_sp_ppzkpcd_r1cs_sp_ppzkpcd(m);
+    init_zk_proof_systems_pcd_r1cs_pcd_r1cs_sp_ppzkpcd_sp_pcd_circuits(m);
+    init_zk_proof_systems_pcd_r1cs_pcd_r1cs_sp_ppzkpcd_run_r1cs_sp_ppzkpcd(m);
 }
