@@ -3,6 +3,7 @@ import pyzpk
 import math
 RAND_MAX = 32767
 
+
 def test_compliance_predicate():
     type_1 = 1
     type_2 = 2
@@ -11,17 +12,20 @@ def test_compliance_predicate():
     relies_on_same_type_inputs = False
     tally_1_accepted_types = {1}
     tally_2_accepted_types = {2, 1}
-    tally_1 = pyzpk.tally_cp_handler(type_1, max_arity, wordsize, relies_on_same_type_inputs, tally_1_accepted_types)
-    tally_2 = pyzpk.tally_cp_handler(type_2, max_arity, wordsize, relies_on_same_type_inputs, tally_2_accepted_types)
+    tally_1 = pyzpk.tally_cp_handler(
+        type_1, max_arity, wordsize, relies_on_same_type_inputs, tally_1_accepted_types)
+    tally_2 = pyzpk.tally_cp_handler(
+        type_2, max_arity, wordsize, relies_on_same_type_inputs, tally_2_accepted_types)
     tally_1.generate_r1cs_constraints()
     tally_2.generate_r1cs_constraints()
     cp_1 = tally_1.get_compliance_predicate()
     cp_2 = tally_2.get_compliance_predicate()
     assert cp_1 and cp_2
 
+
 def test_r1cs_mp_ppzkpcd():
     max_arity = 2
-    depth = 2 #max_layer
+    depth = 2  # max_layer
     wordsize = 32
     test_serialization = True
     test_multi_type = True
@@ -55,26 +59,29 @@ def test_r1cs_mp_ppzkpcd():
                 else:
                     tree_types[node_idx] = 1 + random.randint(0, RAND_MAX) % 2
             tree_elems[node_idx] = random.randint(0, RAND_MAX) % 100
-            tree_arity[node_idx] = 1 + (random.randint(0, RAND_MAX) % max_arity)
+            tree_arity[node_idx] = 1 + \
+                (random.randint(0, RAND_MAX) % max_arity)
             node_idx = node_idx + 1
         nodes_in_layer = nodes_in_layer * max_arity
-        
+
     tree_proofs = []
     tree_messages = []
     for i in range(tree_size):
         tree_proofs.append(0)
         tree_messages.append(0)
 
-    tally_1_accepted_types = {1,2}
+    tally_1_accepted_types = {1, 2}
     tally_2_accepted_types = {1}
-    tally_1 = pyzpk.tally_cp_handler(1, max_arity, wordsize, test_same_type_optimization, tally_1_accepted_types)
-    tally_2 = pyzpk.tally_cp_handler(2, max_arity, wordsize, test_same_type_optimization, tally_2_accepted_types)
+    tally_1 = pyzpk.tally_cp_handler(
+        1, max_arity, wordsize, test_same_type_optimization, tally_1_accepted_types)
+    tally_2 = pyzpk.tally_cp_handler(
+        2, max_arity, wordsize, test_same_type_optimization, tally_2_accepted_types)
     tally_1.generate_r1cs_constraints()
     tally_2.generate_r1cs_constraints()
     cp_1 = tally_1.get_compliance_predicate()
     cp_2 = tally_2.get_compliance_predicate()
 
-    nodes_in_layer =  nodes_in_layer//max_arity
+    nodes_in_layer = nodes_in_layer//max_arity
     layer = depth
     while layer >= 0:
         for i in range(0, nodes_in_layer+1):
@@ -85,13 +92,14 @@ def test_r1cs_mp_ppzkpcd():
             proofs = []
             if not base_case:
                 for i in range(0, max_arity):
-                    proofs.append(tree_proofs[max_arity*cur_idx + i + 1])   
+                    proofs.append(tree_proofs[max_arity*cur_idx + i + 1])
         layer = layer - 1
         nodes_in_layer = nodes_in_layer//max_arity
-        
+
+
 def test_r1cs_sp_ppzkpcd():
     max_arity = 2
-    depth = 2 #max_layer
+    depth = 2  # max_layer
     wordsize = 32
     test_serialization = True
     all_accept = True
@@ -114,9 +122,20 @@ def test_r1cs_sp_ppzkpcd():
         tree_messages.append(0)
 
     type = 1
-    tally_accepted_types = {1,2}
+    tally_accepted_types = {1, 2}
     test_same_type_optimization = True
-    tally = pyzpk.tally_cp_handler(type, max_arity, wordsize, test_same_type_optimization, tally_accepted_types)
+    tally = pyzpk.tally_cp_handler(
+        type, max_arity, wordsize, test_same_type_optimization, tally_accepted_types)
     tally.generate_r1cs_constraints()
     tally_cp = tally.get_compliance_predicate()
-    nodes_in_layer =  nodes_in_layer//max_arity
+    nodes_in_layer = nodes_in_layer//max_arity
+
+
+def test_r1cs_ppzkadsnark():
+    test_serialization = True
+    auth_keys = pyzpk.r1cs_ppzkadsnark_auth_keys()
+    keypair = pyzpk.r1cs_ppzkadsnark_auth_keys()
+    pvk = pyzpk.r1cs_ppzkadsnark_processed_verification_key()
+    labels = []
+    for i in range(10):
+        labels.append(pyzpk.labelT())
