@@ -140,7 +140,7 @@ def test_r1cs_ppzkadsnark():
     for i in range(10):
         labels.append(pyzpk.labelT())
 
-def test_se_ppzksnark():
+def test_se_and_gg_ppzksnark():
     num_constraints = 1000
     input_size = 100
     test_serialization = True

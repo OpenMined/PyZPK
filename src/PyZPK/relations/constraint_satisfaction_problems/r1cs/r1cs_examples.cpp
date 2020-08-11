@@ -25,5 +25,5 @@ void init_relations_constraint_satisfaction_problems_r1cs_examples(py::module &m
     m.def("generate_r1cs_example_with_binary_input", &generate_r1cs_example_with_binary_input<FieldT>, py::arg("num_constraints"), py::arg("num_inputs"));
     
     using FieldTbn = Fp_model<4l, libff::alt_bn128_modulus_r>;
-    m.def("generate_r1cs_example_with_binary_input_se_ppzksnark_pp", &generate_r1cs_example_with_binary_input<FieldTbn>);
+    m.def("generate_r1cs_example_with_binary_inputbn", &generate_r1cs_example_with_binary_input<FieldTbn>);    
 }
