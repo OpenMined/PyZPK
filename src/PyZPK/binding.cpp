@@ -87,6 +87,8 @@ void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_sp_ppzkpcd_sp_pcd_circuits(py::modu
 void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_sp_ppzkpcd_run_r1cs_sp_ppzkpcd(py::module &);
 void init_zk_proof_systems_ppzkadsnark_r1cs_ppzkadsnark_r1cs_ppzkadsnark(py::module &);
 void init_zk_proof_systems_ppzkadsnark_r1cs_ppzkadsnark_params_prf_signature(py::module &);
+void init_zk_proof_systems_ppzksnark_r1cs_se_ppzksnark_r1cs_se_ppzksnark(py::module &);
+void init_zk_proof_systems_ppzksnark_r1cs_se_ppzksnark_run_r1cs_se_ppzksnark(py::module &);
 
 PYBIND11_MODULE(pyzpk, m)
 {
@@ -178,4 +180,6 @@ PYBIND11_MODULE(pyzpk, m)
     init_zk_proof_systems_pcd_r1cs_pcd_r1cs_sp_ppzkpcd_run_r1cs_sp_ppzkpcd(m);
     init_zk_proof_systems_ppzkadsnark_r1cs_ppzkadsnark_r1cs_ppzkadsnark(m);
     init_zk_proof_systems_ppzkadsnark_r1cs_ppzkadsnark_params_prf_signature(m);
+    init_zk_proof_systems_ppzksnark_r1cs_se_ppzksnark_r1cs_se_ppzksnark(m);
+    init_zk_proof_systems_ppzksnark_r1cs_se_ppzksnark_run_r1cs_se_ppzksnark(m);
 }

@@ -1,6 +1,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <libff/algebra/curves/mnt/mnt6/mnt6_pp.hpp>
+#include <libff/algebra/curves/alt_bn128/alt_bn128_pp.hpp>
 #include <libsnark/relations/constraint_satisfaction_problems/r1cs/examples/r1cs_examples.hpp>
 
 namespace py = pybind11;
@@ -22,4 +23,7 @@ void init_relations_constraint_satisfaction_problems_r1cs_examples(py::module &m
 
     m.def("generate_r1cs_example_with_field_input", &generate_r1cs_example_with_field_input<FieldT>, py::arg("num_constraints"), py::arg("num_inputs"));
     m.def("generate_r1cs_example_with_binary_input", &generate_r1cs_example_with_binary_input<FieldT>, py::arg("num_constraints"), py::arg("num_inputs"));
+    
+    using FieldTbn = Fp_model<4l, libff::alt_bn128_modulus_r>;
+    m.def("generate_r1cs_example_with_binary_input_se_ppzksnark_pp", &generate_r1cs_example_with_binary_input<FieldTbn>);
 }
