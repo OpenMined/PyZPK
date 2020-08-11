@@ -86,6 +86,8 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/pcd/r1cs_pcd/r1cs_sp_ppzkpcd/run_r1cs_sp_ppzkpcd.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/ppzkadsnark/r1cs_ppzkadsnark/r1cs_ppzkadsnark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/ppzkadsnark/r1cs_ppzkadsnark/r1cs_ppzkadsnark_params_prf_signature.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/ppzksnark/r1cs_se_ppzksnark/r1cs_se_ppzksnark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/ppzksnark/r1cs_se_ppzksnark/run_r1cs_se_ppzksnark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 

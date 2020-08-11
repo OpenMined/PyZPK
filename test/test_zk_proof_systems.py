@@ -139,3 +139,10 @@ def test_r1cs_ppzkadsnark():
     labels = []
     for i in range(10):
         labels.append(pyzpk.labelT())
+
+def test_se_ppzksnark():
+    num_constraints = 1000
+    input_size = 100
+    test_serialization = True
+    example = pyzpk.generate_r1cs_example_with_binary_input(num_constraints, input_size)
+    assert(example)
