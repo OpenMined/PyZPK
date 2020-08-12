@@ -146,3 +146,54 @@ def test_se_and_gg_ppzksnark():
     test_serialization = True
     example = pyzpk.generate_r1cs_example_with_binary_input(num_constraints, input_size)
     assert(example)
+    
+def test_bacs_ppzksnark():
+    primary_input_size = 10
+    auxiliary_input_size = 10
+    num_gates = 20
+    num_outputs = 5
+    test_serialization = True
+    example = pyzpk.bacs_example()
+    primary_input_list = list()
+    auxiliary_input_list = list()
+    for i in range(0, primary_input_size):
+        primary_input_list.append(pyzpk.Fp_model4bn.random_element())
+    for i in range(0, auxiliary_input_size):
+        auxiliary_input_list.append(pyzpk.Fp_model4bn.random_element())
+
+    example.circuit.primary_input_size = primary_input_size
+    example.circuit.auxiliary_input_size = auxiliary_input_size
+
+    all_vals = list()
+    all_vals.extend(primary_input_list)
+    all_vals.extend(auxiliary_input_list)
+    all_vals.extend(all_vals)
+    for i in range(0, num_gates):
+        num_variables = primary_input_size + auxiliary_input_size + i
+        gate = pyzpk.bacs_gate()
+        gate.lhs = pyzpk.random_linear_combination(num_variables)
+        gate.rhs = pyzpk.random_linear_combination(num_variables)
+        gate.output = pyzpk.variable(num_variables+1)
+        if(i >= num_gates - num_outputs):
+            gate.is_circuit_output = True
+            var_idx = random.randint(
+                0, (primary_input_size + auxiliary_input_size))
+            var_val = pyzpk.Fp_model.one(
+            ) if var_idx == 0 else all_vals[var_idx-1]
+            if random.randint(0, (primary_input_size + auxiliary_input_size)) % 2 == 0:
+                lhs_val = gate.lhs.evaluate(all_vals)
+                coeff = -(lhs_val * var_val.inverse())
+                gate.lhs = gate.lhs + coeff * pyzpk.variable(var_idx)
+            else:
+                rhs_val = gate.rhs.evaluate(all_vals)
+                coeff = -(rhs_val * var_val.inverse())
+                gate.rhs = gate.rhs + coeff * pyzpk.variable(var_idx)
+            assert(gate.evaluate(all_vals).is_zero())
+        else:
+            gate.is_circuit_output = False
+        example.circuit.add_gate(gate)
+        evl_val = gate.evaluate(all_vals)
+        all_vals.append(evl_val)
+
+    assert example.circuit.is_satisfied(
+        primary_input_list, auxiliary_input_list)
