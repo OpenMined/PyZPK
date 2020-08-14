@@ -223,3 +223,47 @@ def test_ram_ppzksnark():
     assert 2*w/8*program_size < 1<<(w-1)
     assert w/8*input_size < 1<<(w-1)
     assert input_size >= 1
+    
+def test_tbcs_ppzksnark():
+    primary_input_size = 10
+    auxiliary_input_size = 10
+    num_gates = 20
+    num_outputs = 5
+    test_serialization = True
+    num_tbcs_gate_types = 16
+    example = pyzpk.tbcs_example()
+    primary_input_list = list()
+    auxiliary_input_list = list()
+    for i in range(0, primary_input_size):
+        primary_input_list.append(
+            False if random.randint(0, RAND_MAX) % 2 == 0 else True)
+    for i in range(0, auxiliary_input_size):
+        auxiliary_input_list.append(
+            False if random.randint(0, RAND_MAX) % 2 == 0 else True)
+
+    example.circuit.primary_input_size = primary_input_size
+    example.circuit.auxiliary_input_size = auxiliary_input_size
+
+    all_vals = list()
+    all_vals.extend(primary_input_list)
+    all_vals.extend(auxiliary_input_list)
+    for i in range(0, num_gates):
+        num_variables = primary_input_size + auxiliary_input_size + i
+        gate = pyzpk.tbcs_gate()
+        gate.left_wire = random.randint(0, RAND_MAX) % (num_variables+1)
+        gate.right_wire = random.randint(0, RAND_MAX) % (num_variables+1)
+        gate.output = num_variables+1
+        if(i >= num_gates - num_outputs):
+            while gate.evaluate(all_vals):
+                gate.type = (pyzpk.tbcs_gate_type)(
+                    random.randint(0, RAND_MAX) % num_tbcs_gate_types)
+            gate.is_circuit_output = True
+        else:
+            gate.type = (pyzpk.tbcs_gate_type)(
+                random.randint(0, RAND_MAX) % num_tbcs_gate_types)
+            gate.is_circuit_output = False
+        example.circuit.add_gate(gate)
+        all_vals.append(gate.evaluate(all_vals))
+
+    assert example.circuit.is_satisfied(
+        primary_input_list, auxiliary_input_list)
