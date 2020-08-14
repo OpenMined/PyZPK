@@ -208,3 +208,18 @@ def test_uscs_ppzksnark():
     example = pyzpk.generate_uscs_example_with_binary_input(
         num_constraints, input_size)
     assert(example)
+
+def test_ram_ppzksnark():
+    w = 16
+    k = 16
+    program_size = 16
+    input_size = 2
+    time_bound = 20
+    boot_trace_size_bound = program_size + input_size
+    satisfiable = True
+    program_size = boot_trace_size_bound / 2
+    input_size = boot_trace_size_bound - program_size
+
+    assert 2*w/8*program_size < 1<<(w-1)
+    assert w/8*input_size < 1<<(w-1)
+    assert input_size >= 1
