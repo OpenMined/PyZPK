@@ -140,13 +140,16 @@ def test_r1cs_ppzkadsnark():
     for i in range(10):
         labels.append(pyzpk.labelT())
 
+
 def test_se_and_gg_ppzksnark():
     num_constraints = 1000
     input_size = 100
     test_serialization = True
-    example = pyzpk.generate_r1cs_example_with_binary_input(num_constraints, input_size)
+    example = pyzpk.generate_r1cs_example_with_binary_input(
+        num_constraints, input_size)
     assert(example)
-    
+
+
 def test_bacs_ppzksnark():
     primary_input_size = 10
     auxiliary_input_size = 10
@@ -197,3 +200,11 @@ def test_bacs_ppzksnark():
 
     assert example.circuit.is_satisfied(
         primary_input_list, auxiliary_input_list)
+
+def test_uscs_ppzksnark():
+    num_constraints = 1000
+    input_size = 100
+    test_serialization = True
+    example = pyzpk.generate_uscs_example_with_binary_input(
+        num_constraints, input_size)
+    assert(example)
