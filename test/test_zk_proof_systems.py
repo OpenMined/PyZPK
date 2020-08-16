@@ -267,3 +267,16 @@ def test_tbcs_ppzksnark():
 
     assert example.circuit.is_satisfied(
         primary_input_list, auxiliary_input_list)
+
+def test_ram_zksnark():
+    w = 32
+    k = 16
+    boot_trace_size_bound = 20
+    time_bound = 10
+    test_serialization = True
+    program_size = boot_trace_size_bound // 2
+    input_size = boot_trace_size_bound - program_size
+
+    assert 2*w/8*program_size < 1<<(w-1)
+    assert w/8*input_size < 1<<(w-1)
+    assert input_size >= 1
