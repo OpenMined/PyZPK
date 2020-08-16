@@ -94,6 +94,8 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/ppzksnark/bacs_ppzksnark/run_bacs_ppzksnark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/ppzksnark/uscs_ppzksnark/uscs_ppzksnark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/ppzksnark/uscs_ppzksnark/run_uscs_ppzksnark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/ppzksnark/ram_ppzksnark/ram_ppzksnark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/zk_proof_systems/ppzksnark/ram_ppzksnark/run_ram_ppzksnark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/binding.cpp"
 )
 
