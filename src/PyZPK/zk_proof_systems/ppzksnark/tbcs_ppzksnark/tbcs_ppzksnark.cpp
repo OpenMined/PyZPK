@@ -68,35 +68,29 @@ void declare_TBCS_Main_Algorithms(py::module &m)
 {
     using ppT = default_tbcs_ppzksnark_pp;
 
-    // A generator algorithm for the TBCS ppzkSNARK.
-    // Given a TBCS constraint system CS, this algorithm produces proving and verification keys for CS.
-    m.def("tbcs_ppzksnark_generator", &tbcs_ppzksnark_generator<ppT>);
+    m.def("tbcs_ppzksnark_generator", &tbcs_ppzksnark_generator<ppT>, R"(A generator algorithm for the TBCS ppzkSNARK.
+    Given a TBCS constraint system CS, this algorithm produces proving and verification keys for CS.)",
+          py::arg("tbcs_ppzksnark_circuit"));
 
-    // A prover algorithm for the TBCS ppzkSNARK.
-    m.def("tbcs_ppzksnark_prover", &tbcs_ppzksnark_prover<ppT>);
+    m.def("tbcs_ppzksnark_prover", &tbcs_ppzksnark_prover<ppT>, "A prover algorithm for the TBCS ppzkSNARK.", py::arg("tbcs_ppzksnark_proving_key"), py::arg("primary_input"), py::arg("auxiliary_input"));
 
-    // A verifier algorithm for the TBCS ppzkSNARK that:
-    //(1) accepts a non-processed verification key, and
-    //(2) has weak input consistency.
-    m.def("tbcs_ppzksnark_verifier_weak_IC", &tbcs_ppzksnark_verifier_weak_IC<ppT>);
+    m.def("tbcs_ppzksnark_verifier_weak_IC", &tbcs_ppzksnark_verifier_weak_IC<ppT>, R"(A verifier algorithm for the TBCS ppzkSNARK that:
+    (1) accepts a non-processed verification key, and (2) has weak input consistency.)",
+          py::arg("tbcs_ppzksnark_verification_key"), py::arg("primary_input"), py::arg("proof"));
 
-    //  A verifier algorithm for the TBCS ppzkSNARK that:
-    //(1) accepts a non-processed verification key, and
-    //(2) has strong input consistency.
-    m.def("tbcs_ppzksnark_verifier_strong_IC", &tbcs_ppzksnark_verifier_strong_IC<ppT>);
+    m.def("tbcs_ppzksnark_verifier_strong_IC", &tbcs_ppzksnark_verifier_strong_IC<ppT>, R"(A verifier algorithm for the TBCS ppzkSNARK that:
+    (1) accepts a non-processed verification key, and (2) has strong input consistency.)",
+          py::arg("tbcs_ppzksnark_verification_key"), py::arg("primary_input"), py::arg("proof"));
 
-    // Convert a (non-processed) verification key into a processed verification key.
-    m.def("tbcs_ppzksnark_verifier_process_vk", &tbcs_ppzksnark_verifier_process_vk<ppT>);
+    m.def("tbcs_ppzksnark_verifier_process_vk", &tbcs_ppzksnark_verifier_process_vk<ppT>, "Convert a (non-processed) verification key into a processed verification key.", py::arg("tbcs_ppzksnark_verification_key"));
 
-    // A verifier algorithm for the TBCS ppzkSNARK that:
-    //(1) accepts a processed verification key, and
-    //(2) has weak input consistency.
-    m.def("tbcs_ppzksnark_online_verifier_weak_IC", &tbcs_ppzksnark_online_verifier_weak_IC<ppT>);
+    m.def("tbcs_ppzksnark_online_verifier_weak_IC", &tbcs_ppzksnark_online_verifier_weak_IC<ppT>, R"(A verifier algorithm for the TBCS ppzkSNARK that:
+    (1) accepts a processed verification key, and (2) has weak input consistency.)",
+          py::arg("tbcs_ppzksnark_processed_verification_key"), py::arg("primary_input"), py::arg("proof"));
 
-    // A verifier algorithm for the TBCS ppzkSNARK that:
-    //(1) accepts a processed verification key, and
-    //(2) has strong input consistency.
-    m.def("tbcs_ppzksnark_online_verifier_strong_IC", &tbcs_ppzksnark_online_verifier_strong_IC<ppT>);
+    m.def("tbcs_ppzksnark_online_verifier_strong_IC", &tbcs_ppzksnark_online_verifier_strong_IC<ppT>, R"(A verifier algorithm for the TBCS ppzkSNARK that:
+    (1) accepts a processed verification key, and (2) has strong input consistency.)",
+          py::arg("tbcs_ppzksnark_processed_verification_key"), py::arg("primary_input"), py::arg("proof"));
 }
 
 void init_zk_proof_systems_ppzksnark_tbcs_ppzksnark_tbcs_ppzksnark(py::module &m)

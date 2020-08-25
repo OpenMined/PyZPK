@@ -13,7 +13,7 @@ void init_gadgetlib2_pp(py::module &m)
     py::class_<PublicParams>(m, "PublicParams")
         .def(py::init<const std::size_t>())
         .def_readwrite("log_p", &PublicParams::log_p)
-        .def("getFp", &PublicParams::getFp);
+        .def("getFp", &PublicParams::getFp, py::arg("long_int_x"));
     
     m.def("initPublicParamsFromDefaultPp", &initPublicParamsFromDefaultPp);
 }

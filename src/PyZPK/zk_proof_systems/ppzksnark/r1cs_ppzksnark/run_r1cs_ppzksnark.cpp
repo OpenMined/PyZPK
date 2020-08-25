@@ -13,5 +13,5 @@ void init_zk_proof_systems_ppzksnark_r1cs_ppzksnark_run_r1cs_ppzksnark(py::modul
     // R1CS example (specified by a constraint system, input, and witness).
 
     using ppT = mnt6_pp;
-    m.def("run_r1cs_ppzksnark", &run_r1cs_ppzksnark<ppT>);
+    m.def("run_r1cs_ppzksnark", &run_r1cs_ppzksnark<ppT>, py::arg("example"), py::arg("test_serialization"));
 }

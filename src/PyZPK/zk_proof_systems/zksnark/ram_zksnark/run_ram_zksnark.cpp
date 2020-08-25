@@ -17,5 +17,5 @@ void init_zk_proof_systems_ppzksnark_ram_zksnark_run_ram_zksnark(py::module &m)
 
     using ram_zksnark_ppT = default_ram_zksnark_pp;
 
-    m.def("run_ram_zksnark", &run_ram_zksnark<ram_zksnark_ppT>);
+    m.def("run_ram_zksnark", &run_ram_zksnark<ram_zksnark_ppT>, py::arg("example"), py::arg("test_serialization"));
 }

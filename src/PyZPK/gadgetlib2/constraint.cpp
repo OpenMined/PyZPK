@@ -15,7 +15,7 @@ void declare_Constraint(py::module &m)
 {
     py::class_<Constraint>(m, "Constraint")
         .def("name", &Constraint::name)
-        .def("isSatisfied", &Constraint::isSatisfied)
+        .def("isSatisfied", &Constraint::isSatisfied, py::arg("assignment"), py::arg("printOnFail"))
         .def("annotation", &Constraint::annotation)
         .def("getUsedVariables", &Constraint::getUsedVariables)
         .def("asPolynomial", &Constraint::asPolynomial);
@@ -33,7 +33,7 @@ void declare_Rank1Constraint(py::module &m)
         .def("a", &Rank1Constraint::a)
         .def("b", &Rank1Constraint::b)
         .def("c", &Rank1Constraint::c)
-        .def("isSatisfied", &Rank1Constraint::isSatisfied)
+        .def("isSatisfied", &Rank1Constraint::isSatisfied, py::arg("assignment"), py::arg("printOnFail"))
         .def("annotation", &Rank1Constraint::annotation)
         .def("getUsedVariables", &Rank1Constraint::getUsedVariables)
         .def("asPolynomial", &Rank1Constraint::asPolynomial);
@@ -45,7 +45,7 @@ void declare_PolynomialConstraint(py::module &m)
         .def(py::init<const Polynomial &,
                       const Polynomial &,
                       const ::std::string &>())
-        .def("isSatisfied", &PolynomialConstraint::isSatisfied)
+        .def("isSatisfied", &PolynomialConstraint::isSatisfied, py::arg("assignment"), py::arg("printOnFail"))
         .def("annotation", &PolynomialConstraint::annotation)
         .def("getUsedVariables", &PolynomialConstraint::getUsedVariables)
         .def("asPolynomial", &PolynomialConstraint::asPolynomial);
@@ -55,13 +55,13 @@ void declare_ConstraintSystem(py::module &m)
 {
     py::class_<ConstraintSystem>(m, "ConstraintSystem")
         .def(py::init<>())
-        .def("isSatisfied", &ConstraintSystem::isSatisfied)
+        .def("isSatisfied", &ConstraintSystem::isSatisfied, py::arg("assignment"), py::arg("printOnFail"))
         .def("annotation", &ConstraintSystem::annotation)
         .def("getUsedVariables", &ConstraintSystem::getUsedVariables)
         .def("getNumberOfConstraints", &ConstraintSystem::getNumberOfConstraints)
-        .def("getConstraint", &ConstraintSystem::getConstraint)
-        .def("addConstraint", py::overload_cast<const Rank1Constraint &>(&ConstraintSystem::addConstraint), py::arg("c"))
-        .def("addConstraint", py::overload_cast<const PolynomialConstraint &>(&ConstraintSystem::addConstraint), py::arg("c"));
+        .def("getConstraint", &ConstraintSystem::getConstraint, py::arg("idx"))
+        .def("addConstraint", py::overload_cast<const Rank1Constraint &>(&ConstraintSystem::addConstraint), py::arg("Rank1Constraint"))
+        .def("addConstraint", py::overload_cast<const PolynomialConstraint &>(&ConstraintSystem::addConstraint), py::arg("PolynomialConstraint"));
 }
 
 void init_gadgetlib2_constraint(py::module &m)

@@ -48,8 +48,8 @@ void declare_knapsack_CRH_with_field_out_gadget(py::module &m)
         .def("generate_r1cs_witness", &knapsack_CRH_with_field_out_gadget<FieldT>::generate_r1cs_witness)
         .def_static("get_digest_len", &knapsack_CRH_with_field_out_gadget<FieldT>::get_digest_len)
         .def_static("get_block_len", &knapsack_CRH_with_field_out_gadget<FieldT>::get_block_len)
-        .def_static("get_hash", &knapsack_CRH_with_field_out_gadget<FieldT>::get_hash)
-        .def_static("sample_randomness", &knapsack_CRH_with_field_out_gadget<FieldT>::sample_randomness);
+        .def_static("get_hash", &knapsack_CRH_with_field_out_gadget<FieldT>::get_hash, py::arg("input"))
+        .def_static("sample_randomness", &knapsack_CRH_with_field_out_gadget<FieldT>::sample_randomness, py::arg("input_len"));
 }
 
 // Knapsack with binary output
@@ -63,12 +63,12 @@ void declare_knapsack_CRH_with_bit_out_gadget(py::module &m)
                       const block_variable<FieldT> &,
                       const digest_variable<FieldT> &,
                       const std::string &>())
-        .def("generate_r1cs_constraints", &knapsack_CRH_with_bit_out_gadget<FieldT>::generate_r1cs_constraints)
+        .def("generate_r1cs_constraints", &knapsack_CRH_with_bit_out_gadget<FieldT>::generate_r1cs_constraints, py::arg("enforce_bitness"))
         .def("generate_r1cs_witness", &knapsack_CRH_with_bit_out_gadget<FieldT>::generate_r1cs_witness)
         .def_static("get_digest_len", &knapsack_CRH_with_bit_out_gadget<FieldT>::get_digest_len)
         .def_static("get_block_len", &knapsack_CRH_with_bit_out_gadget<FieldT>::get_block_len)
-        .def_static("get_hash", &knapsack_CRH_with_bit_out_gadget<FieldT>::get_hash)
-        .def_static("sample_randomness", &knapsack_CRH_with_bit_out_gadget<FieldT>::sample_randomness);
+        .def_static("get_hash", &knapsack_CRH_with_bit_out_gadget<FieldT>::get_hash, py::arg("input"))
+        .def_static("sample_randomness", &knapsack_CRH_with_bit_out_gadget<FieldT>::sample_randomness, py::arg("input_len"));
 }
 
 void init_gadgetlib1_hashes_knapsack_gadget(py::module &m)

@@ -15,5 +15,5 @@ void init_zk_proof_systems_ppzksnark_uscs_ppzksnark_run_uscs_ppzksnark(py::modul
     // USCS example (specified by a circuit, primary input, and auxiliary input).
 
     using ppT = default_uscs_ppzksnark_pp;
-    m.def("run_uscs_ppzksnark", &run_uscs_ppzksnark<ppT>);
+    m.def("run_uscs_ppzksnark", &run_uscs_ppzksnark<ppT>, py::arg("example"), py::arg("test_serialization"));
 }

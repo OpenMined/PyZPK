@@ -22,7 +22,7 @@ void init_set_membership_proof_variable(py::module &m)
         .def_readonly("max_entries", &set_membership_proof_variable<FieldT, HashT>::max_entries)
         .def_readonly("tree_depth", &set_membership_proof_variable<FieldT, HashT>::tree_depth)
         .def("generate_r1cs_constraints", &set_membership_proof_variable<FieldT, HashT>::generate_r1cs_constraints)
-        .def("generate_r1cs_witness", &set_membership_proof_variable<FieldT, HashT>::generate_r1cs_witness)
+        .def("generate_r1cs_witness", &set_membership_proof_variable<FieldT, HashT>::generate_r1cs_witness, py::arg("set_membership_proof"))
         .def("get_membership_proof", &set_membership_proof_variable<FieldT, HashT>::get_membership_proof)
-        .def_static("as_r1cs_variable_assignment", &set_membership_proof_variable<FieldT, HashT>::as_r1cs_variable_assignment);
+        .def_static("as_r1cs_variable_assignment", &set_membership_proof_variable<FieldT, HashT>::as_r1cs_variable_assignment, py::arg("set_membership_proof"));
 }

@@ -24,7 +24,7 @@ void declare_r1cs_pcd_compliance_predicate_auxiliary_input(py::module &m)
         .def(py::init<const std::vector<std::shared_ptr<r1cs_pcd_message<FieldT>>> &,
                       const std::shared_ptr<r1cs_pcd_local_data<FieldT>> &,
                       const r1cs_pcd_witness<FieldT> &>())
-        .def("as_r1cs_auxiliary_input", &r1cs_pcd_compliance_predicate_auxiliary_input<FieldT>::as_r1cs_auxiliary_input);
+        .def("as_r1cs_auxiliary_input", &r1cs_pcd_compliance_predicate_auxiliary_input<FieldT>::as_r1cs_auxiliary_input, py::arg("incoming_message_payload_lengths"));
 }
 
 void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_pcd_params(py::module &m)

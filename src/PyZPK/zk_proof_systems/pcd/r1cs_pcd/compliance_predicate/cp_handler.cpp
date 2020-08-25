@@ -22,7 +22,7 @@ void declare_r1cs_pcd_message_variable(py::module &m)
 
     py::class_<r1cs_pcd_message_variable<FieldT>, gadget<FieldT>>(m, "r1cs_pcd_message_variable")
         .def("update_all_vars", &r1cs_pcd_message_variable<FieldT>::update_all_vars)
-        .def("generate_r1cs_witness", &r1cs_pcd_message_variable<FieldT>::generate_r1cs_witness)
+        .def("generate_r1cs_witness", &r1cs_pcd_message_variable<FieldT>::generate_r1cs_witness, py::arg("message"))
         .def("get_message", &r1cs_pcd_message_variable<FieldT>::get_message);
 }
 
@@ -36,7 +36,7 @@ void declare_r1cs_pcd_local_data_variable(py::module &m)
         .def(py::init<protoboard<FieldT> &,
                       const std::string &>())
         .def("update_all_vars", &r1cs_pcd_local_data_variable<FieldT>::update_all_vars)
-        .def("generate_r1cs_witness", &r1cs_pcd_local_data_variable<FieldT>::generate_r1cs_witness);
+        .def("generate_r1cs_witness", &r1cs_pcd_local_data_variable<FieldT>::generate_r1cs_witness, py::arg("local_data"));
 }
 
 void declare_compliance_predicate_handler(py::module &m)
@@ -48,11 +48,11 @@ void declare_compliance_predicate_handler(py::module &m)
 
     py::class_<compliance_predicate_handler<FieldT, protoboardT>>(m, "compliance_predicate_handler")
         .def("generate_r1cs_constraints", &compliance_predicate_handler<FieldT, protoboardT>::generate_r1cs_constraints)
-        .def("generate_r1cs_witness", &compliance_predicate_handler<FieldT, protoboardT>::generate_r1cs_witness)
+        .def("generate_r1cs_witness", &compliance_predicate_handler<FieldT, protoboardT>::generate_r1cs_witness, py::arg("incoming_message_values"), py::arg("local_data_value"))
         .def("get_compliance_predicate", &compliance_predicate_handler<FieldT, protoboardT>::get_compliance_predicate)
         .def("get_full_variable_assignment", &compliance_predicate_handler<FieldT, protoboardT>::get_full_variable_assignment)
         .def("get_arity", &compliance_predicate_handler<FieldT, protoboardT>::get_arity)
-        .def("get_incoming_message", &compliance_predicate_handler<FieldT, protoboardT>::get_incoming_message)
+        .def("get_incoming_message", &compliance_predicate_handler<FieldT, protoboardT>::get_incoming_message, py::arg("message_idx"))
         .def("get_witness", &compliance_predicate_handler<FieldT, protoboardT>::get_witness);
 }
 

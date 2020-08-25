@@ -36,6 +36,6 @@ void init_gadgetlib1_fooram_cpu_checker(py::module &m)
         .def("generate_r1cs_constraints", &fooram_cpu_checker<FieldT>::generate_r1cs_constraints)
         .def("generate_r1cs_witness", &fooram_cpu_checker<FieldT>::generate_r1cs_witness)
         .def("generate_r1cs_witness_address", &fooram_cpu_checker<FieldT>::generate_r1cs_witness_address)
-        .def("generate_r1cs_witness_other", &fooram_cpu_checker<FieldT>::generate_r1cs_witness_other)
+        .def("generate_r1cs_witness_other", &fooram_cpu_checker<FieldT>::generate_r1cs_witness_other, py::arg("aux_it"), py::arg("aux_end"))
         .def("dump", &fooram_cpu_checker<FieldT>::dump);
 }

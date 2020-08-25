@@ -25,5 +25,5 @@ void init_gadgetlib1_routing_benes_routing_gadget(py::module &m)
                       const size_t,
                       const std::string &>())
         .def("generate_r1cs_constraints", &benes_routing_gadget<FieldT>::generate_r1cs_constraints)
-        .def("generate_r1cs_witness", &benes_routing_gadget<FieldT>::generate_r1cs_witness);
+        .def("generate_r1cs_witness", &benes_routing_gadget<FieldT>::generate_r1cs_witness, py::arg("permutation"));
 }

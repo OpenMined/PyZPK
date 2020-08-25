@@ -9,6 +9,6 @@ using namespace libsnark;
 
 void init_gadgetlib2_integration(py::module &m)
 {
-    m.def("get_constraint_system_from_gadgetlib2", &get_constraint_system_from_gadgetlib2);
-    m.def("get_variable_assignment_from_gadgetlib2", &get_variable_assignment_from_gadgetlib2);
+    m.def("get_constraint_system_from_gadgetlib2", &get_constraint_system_from_gadgetlib2, py::arg("Protoboard"));
+    m.def("get_variable_assignment_from_gadgetlib2", &get_variable_assignment_from_gadgetlib2, py::arg("Protoboard"));
 }

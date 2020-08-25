@@ -53,7 +53,7 @@ void declare_tally_cp_handler(py::module &m)
                       const bool,
                       const std::set<size_t>>())
         .def("generate_r1cs_constraints", &tally_cp_handler<FieldT>::generate_r1cs_constraints)
-        .def("generate_r1cs_witness", &tally_cp_handler<FieldT>::generate_r1cs_witness)
+        .def("generate_r1cs_witness", &tally_cp_handler<FieldT>::generate_r1cs_witness, py::arg("incoming_messages"), py::arg("local_data"))
         .def("get_base_case_message", &tally_cp_handler<FieldT>::get_base_case_message);
 }
 

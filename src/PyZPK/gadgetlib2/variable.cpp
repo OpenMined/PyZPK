@@ -50,7 +50,7 @@ void declare_FElem(py::module &m)
         .def(-py::self)
         .def("inverse", &FElem::inverse)
         .def("asLong", &FElem::asLong)
-        .def("getBit", &FElem::getBit);
+        .def("getBit", &FElem::getBit, py::arg("i"), py::arg("fieldType"));
 }
 
 void declare_FConst(py::module &m)
@@ -167,7 +167,7 @@ void declare_LinearTerm(py::module &m)
         .def(py::self + int())
         .def("fieldtype", &LinearTerm::fieldtype)
         .def("asString", &LinearTerm::asString)
-        .def("eval", &LinearTerm::eval)
+        .def("eval", &LinearTerm::eval, py::arg("VariableAssignment"))
         .def("variable", &LinearTerm::variable);
 }
 
@@ -183,7 +183,7 @@ void declare_LinearCombination(py::module &m)
         .def(py::self -= py::self)
         .def(py::self *= FElem())
         .def(py::self + int())
-        .def("eval", &LinearCombination::eval)
+        .def("eval", &LinearCombination::eval, py::arg("VariableAssignment"))
         .def("asString", &LinearCombination::asString)
         .def("getUsedVariables", &LinearCombination::getUsedVariables);
 }

@@ -17,5 +17,5 @@ void init_zk_proof_systems_ppzksnark_r1cs_gg_ppzksnark_run_r1cs_gg_ppzksnark(py:
 
     using ppT = default_r1cs_gg_ppzksnark_pp;
 
-    m.def("run_r1cs_gg_ppzksnark", &run_r1cs_gg_ppzksnark<ppT>);
+    m.def("run_r1cs_gg_ppzksnark", &run_r1cs_gg_ppzksnark<ppT>, py::arg("example"), py::arg("test_serialization"));
 }

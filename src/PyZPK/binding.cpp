@@ -4,6 +4,8 @@ namespace py = pybind11;
 void init_utils(py::module &);
 void init_data_structures_integer_permutation(py::module &);
 void init_data_structures_set_commitment(py::module &);
+void init_data_structures_accumulation_vector(py::module &);
+void init_data_structures_sparse_vector(py::module &);
 void init_algorithms_benes(py::module &);
 void init_algorithms_as_waksman(py::module &);
 void init_default_types_r1cs_ppzkpcd_pp(py::module &);
@@ -109,6 +111,8 @@ PYBIND11_MODULE(pyzpk, m)
     init_utils(m);
     init_data_structures_integer_permutation(m);
     init_data_structures_set_commitment(m);
+    init_data_structures_accumulation_vector(m);
+    init_data_structures_sparse_vector(m);
     init_algorithms_benes(m);
     init_algorithms_as_waksman(m);
     init_default_types_r1cs_ppzkpcd_pp(m);
