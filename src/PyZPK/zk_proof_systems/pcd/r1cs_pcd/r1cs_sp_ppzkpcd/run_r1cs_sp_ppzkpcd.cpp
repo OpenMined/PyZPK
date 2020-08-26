@@ -16,5 +16,5 @@ void init_zk_proof_systems_pcd_r1cs_pcd_r1cs_sp_ppzkpcd_run_r1cs_sp_ppzkpcd(py::
 
     // Runs the single-predicate ppzkPCD (generator, prover, and verifier) for the
     // "tally compliance predicate", of a given wordsize, arity, and depth.
-    m.def("run_r1cs_sp_ppzkpcd_tally_example", &run_r1cs_sp_ppzkpcd_tally_example<PCD_ppT>);
+    m.def("run_r1cs_sp_ppzkpcd_tally_example", &run_r1cs_sp_ppzkpcd_tally_example<PCD_ppT>, py::arg("wordsize"), py::arg("arity"), py::arg("depth"), py::arg("test_serialization"));
 }

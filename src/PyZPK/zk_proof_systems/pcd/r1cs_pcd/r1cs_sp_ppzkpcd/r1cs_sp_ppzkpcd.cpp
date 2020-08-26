@@ -114,22 +114,22 @@ void declare_sp_Main_algorithms(py::module &m)
     using PCD_ppT = default_r1cs_ppzkpcd_pp;
     // A generator algorithm for the R1CS (single-predicate) ppzkPCD.
     // Given a compliance predicate, this algorithm produces proving and verification keys for the predicate.
-    m.def("r1cs_sp_ppzkpcd_generator", &r1cs_sp_ppzkpcd_generator<PCD_ppT>);
+    m.def("r1cs_sp_ppzkpcd_generator", &r1cs_sp_ppzkpcd_generator<PCD_ppT>, py::arg("compliance_predicate"));
 
     // A prover algorithm for the R1CS (single-predicate) ppzkPCD.
     // Given a proving key, inputs for the compliance predicate, and proofs for
     // the predicate's input messages, this algorithm produces a proof (of knowledge)
     // that attests to the compliance of the output message.
-    m.def("r1cs_sp_ppzkpcd_prover", &r1cs_sp_ppzkpcd_prover<PCD_ppT>);
+    m.def("r1cs_sp_ppzkpcd_prover", &r1cs_sp_ppzkpcd_prover<PCD_ppT>, py::arg("r1cs_sp_ppzkpcd_proving_key"), py::arg("primary_input"), py::arg("auxiliary_input"), py::arg("incoming_proofs"));
 
     // A verifier algorithm for the R1CS (single-predicate) ppzkPCD that accepts a non-processed verification key.
-    m.def("r1cs_sp_ppzkpcd_verifier", &r1cs_sp_ppzkpcd_verifier<PCD_ppT>);
+    m.def("r1cs_sp_ppzkpcd_verifier", &r1cs_sp_ppzkpcd_verifier<PCD_ppT>, py::arg("r1cs_sp_ppzkpcd_verification_key"), py::arg("primary_input"), py::arg("proof"));
 
     // Convert a (non-processed) verification key into a processed verification key.
-    m.def("r1cs_sp_ppzkpcd_process_vk", &r1cs_sp_ppzkpcd_process_vk<PCD_ppT>);
+    m.def("r1cs_sp_ppzkpcd_process_vk", &r1cs_sp_ppzkpcd_process_vk<PCD_ppT>, py::arg("r1cs_sp_ppzkpcd_verification_key"));
 
     // A verifier algorithm for the R1CS (single-predicate) ppzkPCD that accepts a processed verification key.
-    m.def("r1cs_sp_ppzkpcd_online_verifier", &r1cs_sp_ppzkpcd_online_verifier<PCD_ppT>);
+    m.def("r1cs_sp_ppzkpcd_online_verifier", &r1cs_sp_ppzkpcd_online_verifier<PCD_ppT>, py::arg("r1cs_sp_ppzkpcd_processed_verification_key"), py::arg("primary_input"), py::arg("proof"));
 
 }
 

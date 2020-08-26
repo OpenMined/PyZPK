@@ -14,5 +14,5 @@ void init_zk_proof_systems_ppzksnark_tbcs_ppzksnark_run_tbcs_ppzksnark(py::modul
     // TBCS example (specified by an architecture, boot trace, auxiliary input, and time bound).
 
     using ppT = default_tbcs_ppzksnark_pp;
-    m.def("run_tbcs_ppzksnark", &run_tbcs_ppzksnark<ppT>);
+    m.def("run_tbcs_ppzksnark", &run_tbcs_ppzksnark<ppT>, py::arg("example"), py::arg("test_serialization"));
 }

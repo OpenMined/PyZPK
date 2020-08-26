@@ -25,5 +25,5 @@ void init_gadgetlib1_routing_as_waksman_routing_gadget(py::module &m)
                       const std::vector<pb_variable_array<FieldT>> &,
                       const std::string &>())
         .def("generate_r1cs_constraints", &as_waksman_routing_gadget<FieldT>::generate_r1cs_constraints)
-        .def("generate_r1cs_witness", &as_waksman_routing_gadget<FieldT>::generate_r1cs_witness);
+        .def("generate_r1cs_witness", &as_waksman_routing_gadget<FieldT>::generate_r1cs_witness, py::arg("permutation"));
 }

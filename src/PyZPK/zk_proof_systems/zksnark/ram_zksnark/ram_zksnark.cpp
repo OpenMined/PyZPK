@@ -102,15 +102,13 @@ void declare_RAM_zksnark_Main_Algorithms(py::module &m)
 {
     using ram_zksnark_ppT = default_ram_zksnark_pp;
 
-    // A generator algorithm for the RAM zkSNARK.
-    // Given a RAM constraint system CS, this algorithm produces proving and verification keys for CS.
-    m.def("ram_zksnark_generator", &ram_zksnark_generator<ram_zksnark_ppT>);
+    m.def("ram_zksnark_generator", &ram_zksnark_generator<ram_zksnark_ppT>, R"(A generator algorithm for the RAM zkSNARK.
+    Given a RAM constraint system CS, this algorithm produces proving and verification keys for CS.)",
+          py::arg("ram_zksnark_architecture_params"));
 
-    // A prover algorithm for the R1CS RAM zkSNARK.
-    m.def("ram_zksnark_prover", &ram_zksnark_prover<ram_zksnark_ppT>);
+    m.def("ram_zksnark_prover", &ram_zksnark_prover<ram_zksnark_ppT>, R"(A prover algorithm for the R1CS RAM zkSNARK.)", py::arg("ram_zksnark_proving_key"), py::arg("primary_input"), py::arg("time_bound"), py::arg("auxiliary_input"));
 
-    //  A verifier algorithm for the RAM zkSNARK.
-    m.def("ram_zksnark_verifier", &ram_zksnark_verifier<ram_zksnark_ppT>);
+    m.def("ram_zksnark_verifier", &ram_zksnark_verifier<ram_zksnark_ppT>, R"(A verifier algorithm for the RAM zkSNARK.)", py::arg("ram_zksnark_verification_key"), py::arg("primary_input"), py::arg("time_bound"), py::arg("proof"));
 }
 
 void init_zk_proof_systems_zksnark_ram_zksnark_ram_zksnark(py::module &m)

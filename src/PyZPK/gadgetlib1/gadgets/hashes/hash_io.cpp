@@ -22,7 +22,7 @@ void declare_digest_variable(py::module &m)
                       const pb_variable<FieldT> &,
                       const std::string &>())
         .def("generate_r1cs_constraints", &digest_variable<FieldT>::generate_r1cs_constraints)
-        .def("generate_r1cs_witness", &digest_variable<FieldT>::generate_r1cs_witness)
+        .def("generate_r1cs_witness", &digest_variable<FieldT>::generate_r1cs_witness, py::arg("contents"))
         .def("get_digest", &digest_variable<FieldT>::get_digest);
 }
 
@@ -41,7 +41,7 @@ void declare_block_variable(py::module &m)
                       const digest_variable<FieldT> &,
                       const digest_variable<FieldT> &,
                       const std::string &>())
-        .def("generate_r1cs_witness", &block_variable<FieldT>::generate_r1cs_witness)
+        .def("generate_r1cs_witness", &block_variable<FieldT>::generate_r1cs_witness, py::arg("contents"))
         .def("get_block", &block_variable<FieldT>::get_block);
 }
 

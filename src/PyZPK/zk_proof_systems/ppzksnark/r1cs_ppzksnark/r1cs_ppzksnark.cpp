@@ -246,14 +246,14 @@ void declare_Main_algorithms(py::module &m)
 {
     using ppT = mnt6_pp;
 
-    m.def("r1cs_ppzksnark_generator", &r1cs_ppzksnark_generator<ppT>, "A generator algorithm for the R1CS ppzkSNARK Given a R1CS constraint system CS, this algorithm produces proving and verification keys for C");
-    m.def("r1cs_ppzksnark_prover", &r1cs_ppzksnark_prover<ppT>, "A prover algorithm for the R1CS ppzkSNARK.");
-    m.def("r1cs_ppzksnark_verifier_weak_IC", &r1cs_ppzksnark_verifier_weak_IC<ppT>, "A verifier algorithm for the R1CS ppzkSNARK");
-    m.def("r1cs_ppzksnark_verifier_strong_IC", &r1cs_ppzksnark_verifier_strong_IC<ppT>, "A verifier algorithm for the R1CS ppzkSNARK");
-    m.def("r1cs_ppzksnark_verifier_process_vk", &r1cs_ppzksnark_verifier_process_vk<ppT>, "Convert a (non-processed) verification key into a processed verification key.");
-    m.def("r1cs_ppzksnark_online_verifier_weak_IC", &r1cs_ppzksnark_online_verifier_weak_IC<ppT>, "A verifier algorithm for the R1CS ppzkSNARK");
-    m.def("r1cs_ppzksnark_online_verifier_strong_IC", &r1cs_ppzksnark_online_verifier_strong_IC<ppT>, "A verifier algorithm for the R1CS ppzkSNARK");
-    m.def("r1cs_ppzksnark_affine_verifier_weak_IC", &r1cs_ppzksnark_affine_verifier_weak_IC<ppT>, "A verifier algorithm for the R1CS ppzkSNARK");
+    m.def("r1cs_ppzksnark_generator", &r1cs_ppzksnark_generator<ppT>, py::arg("r1cs_ppzksnark_constraint_system"), "A generator algorithm for the R1CS ppzkSNARK Given a R1CS constraint system CS, this algorithm produces proving and verification keys for C");
+    m.def("r1cs_ppzksnark_prover", &r1cs_ppzksnark_prover<ppT>, py::arg("r1cs_ppzksnark_proving_key"), py::arg("primary_input"), py::arg("auxiliary_input"), "A prover algorithm for the R1CS ppzkSNARK.");
+    m.def("r1cs_ppzksnark_verifier_weak_IC", &r1cs_ppzksnark_verifier_weak_IC<ppT>, py::arg("r1cs_ppzksnark_verification_key"), py::arg("primary_input"), py::arg("proof"), "A verifier algorithm for the R1CS ppzkSNARK");
+    m.def("r1cs_ppzksnark_verifier_strong_IC", &r1cs_ppzksnark_verifier_strong_IC<ppT>, py::arg("r1cs_ppzksnark_verification_key"), py::arg("primary_input"), py::arg("proof"), "A verifier algorithm for the R1CS ppzkSNARK");
+    m.def("r1cs_ppzksnark_verifier_process_vk", &r1cs_ppzksnark_verifier_process_vk<ppT>, py::arg("r1cs_ppzksnark_verification_key"), "Convert a (non-processed) verification key into a processed verification key.");
+    m.def("r1cs_ppzksnark_online_verifier_weak_IC", &r1cs_ppzksnark_online_verifier_weak_IC<ppT>, py::arg("r1cs_ppzksnark_processed_verification_key"), py::arg("input"), py::arg("proof"), "A verifier algorithm for the R1CS ppzkSNARK");
+    m.def("r1cs_ppzksnark_online_verifier_strong_IC", &r1cs_ppzksnark_online_verifier_strong_IC<ppT>, py::arg("r1cs_ppzksnark_processed_verification_key"), py::arg("primary_input"), py::arg("proof"), "A verifier algorithm for the R1CS ppzkSNARK");
+    m.def("r1cs_ppzksnark_affine_verifier_weak_IC", &r1cs_ppzksnark_affine_verifier_weak_IC<ppT>, py::arg("r1cs_ppzksnark_verification_key"), py::arg("primary_input"), py::arg("proof"), "A verifier algorithm for the R1CS ppzkSNARK");
 }
 
 void init_zk_proof_systems_ppzksnark_r1cs_ppzksnark_r1cs_ppzksnark(py::module &m)

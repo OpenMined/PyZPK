@@ -15,8 +15,8 @@ void init_gadgetlib1_routing_profile_routing_gadgets(py::module &m)
 {
     using FieldT = Fp_model<5l, libff::mnt46_modulus_B>;
 
-    m.def("get_as_waksman_size", &get_as_waksman_size<FieldT>);
-    m.def("get_benes_size", &get_benes_size<FieldT>);
-    m.def("profile_routing_gadgets", &profile_routing_gadgets<FieldT>);
-    m.def("profile_num_switches", &profile_num_switches<FieldT>);
+    m.def("get_as_waksman_size", &get_as_waksman_size<FieldT>, py::arg("n"), py::arg("l"), py::arg("num_constraints"), py::arg("num_variables"));
+    m.def("get_benes_size", &get_benes_size<FieldT>, py::arg("n"), py::arg("l"), py::arg("num_constraints"), py::arg("num_variables"));
+    m.def("profile_routing_gadgets", &profile_routing_gadgets<FieldT>, py::arg("l"));
+    m.def("profile_num_switches", &profile_num_switches<FieldT>, py::arg("l"));
 }

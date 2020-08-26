@@ -90,19 +90,15 @@ void declare_ram_ppzksnark_keypair(py::module &m)
         .def(py::init<const ram_ppzksnark_keypair<ppT> &>());
 }
 
-
 void declare_RAM_Main_Algorithms(py::module &m)
 {
     using ppT = default_ram_ppzksnark_pp;
 
-    //  A generator algorithm for the RAM ppzkSNARK.
-    m.def("ram_ppzksnark_generator", &ram_ppzksnark_generator<ppT>);
+    m.def("ram_ppzksnark_generator", &ram_ppzksnark_generator<ppT>, "A generator algorithm for the RAM ppzkSNARK.", py::arg("ram_ppzksnark_architecture_params"), py::arg("primary_input_size_bound"), py::arg("time_bound"));
 
-    // A prover algorithm for the RAM ppzkSNARK.
-    m.def("ram_ppzksnark_prover", &ram_ppzksnark_prover<ppT>);
+    m.def("ram_ppzksnark_prover", &ram_ppzksnark_prover<ppT>, "A prover algorithm for the RAM ppzkSNARK.", py::arg("ram_ppzksnark_proving_key"), py::arg("primary_input"), py::arg("auxiliary_input"));
 
-    // A verifier algorithm for the RAM ppzkSNARK that:
-    m.def("ram_ppzksnark_verifier", &ram_ppzksnark_verifier<ppT>);
+    m.def("ram_ppzksnark_verifier", &ram_ppzksnark_verifier<ppT>, "A verifier algorithm for the RAM ppzkSNARK", py::arg("ram_ppzksnark_verification_key"), py::arg("primary_input"), py::arg("proof"));
 }
 
 void init_zk_proof_systems_ppzksnark_ram_ppzksnark_ram_ppzksnark(py::module &m)

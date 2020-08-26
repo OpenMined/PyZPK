@@ -28,7 +28,7 @@ void declare_r1cs_ppzksnark_proof_variable(py::module &m)
         .def(py::init<protoboard<FieldT> &,
                       const std::string &>())
         .def("generate_r1cs_constraints", &r1cs_ppzksnark_proof_variable<ppT>::generate_r1cs_constraints)
-        .def("generate_r1cs_witness", &r1cs_ppzksnark_proof_variable<ppT>::generate_r1cs_witness);
+        .def("generate_r1cs_witness", &r1cs_ppzksnark_proof_variable<ppT>::generate_r1cs_witness, py::arg("proof"));
 }
 
 void declare_r1cs_ppzksnark_verification_key_variable(py::module &m)
@@ -41,12 +41,12 @@ void declare_r1cs_ppzksnark_verification_key_variable(py::module &m)
                       const pb_variable_array<FieldT> &,
                       const size_t,
                       const std::string &>())
-        .def("generate_r1cs_constraints", &r1cs_ppzksnark_verification_key_variable<ppT>::generate_r1cs_constraints)
+        .def("generate_r1cs_constraints", &r1cs_ppzksnark_verification_key_variable<ppT>::generate_r1cs_constraints, py::arg("enforce_bitness"))
         .def("generate_r1cs_witness", py::overload_cast<const r1cs_ppzksnark_verification_key<other_curve<ppT>> &>(&r1cs_ppzksnark_verification_key_variable<ppT>::generate_r1cs_witness), py::arg("vk"))
         .def("generate_r1cs_witness", py::overload_cast<const libff::bit_vector &>(&r1cs_ppzksnark_verification_key_variable<ppT>::generate_r1cs_witness), py::arg("vk"))
         .def("get_bits", &r1cs_ppzksnark_verification_key_variable<ppT>::get_bits)
-        .def_static("size_in_bits", &r1cs_ppzksnark_verification_key_variable<ppT>::size_in_bits)
-        .def_static("get_verification_key_bits", &r1cs_ppzksnark_verification_key_variable<ppT>::get_verification_key_bits);
+        .def_static("size_in_bits", &r1cs_ppzksnark_verification_key_variable<ppT>::size_in_bits, py::arg("input_size"))
+        .def_static("get_verification_key_bits", &r1cs_ppzksnark_verification_key_variable<ppT>::get_verification_key_bits, py::arg("r1cs_vk"));
 }
 
 void declare_r1cs_ppzksnark_preprocessed_r1cs_ppzksnark_verification_key_variable(py::module &m)

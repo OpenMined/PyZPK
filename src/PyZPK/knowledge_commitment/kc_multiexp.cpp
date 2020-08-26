@@ -22,8 +22,10 @@ void init_knowledge_commitment_kc_multiexp(py::module &m)
     using T1 = libff::G1<ppT>;
     using T2 = libff::G1<ppT>;
 
-    m.def("opt_window_wnaf_exp", &opt_window_wnaf_exp<T1, T2, 5l>);
-    m.def("kc_multi_exp_with_mixed_addition", &kc_multi_exp_with_mixed_addition<T1, T2, FieldT, libff::multi_exp_method_bos_coster>);
-    m.def("kc_batch_exp", &kc_batch_exp<T1, T2, FieldT>);
+    m.def("opt_window_wnaf_exp", &opt_window_wnaf_exp<T1, T2, 5l>, py::arg("knowledge_commitment_base"), py::arg("scalar"), py::arg("scalar_bit"));
+    m.def("kc_multi_exp_with_mixed_addition", &kc_multi_exp_with_mixed_addition<T1, T2, FieldT, libff::multi_exp_method_bos_coster>, py::arg("knowledge_commitment_vector"), 
+    py::arg("min_idx"), py::arg("max_idx"), py::arg("scalar_start"), py::arg("scalar_end"), py::arg("chunks"));
+    m.def("kc_batch_exp", &kc_batch_exp<T1, T2, FieldT>, py::arg("scalar_size"), py::arg("T1_window"), py::arg("T2_window"), py::arg("T1_table")
+    , py::arg("T2_table"), py::arg("T1_coeff"), py::arg("T2_coeff"), py::arg("vector"), py::arg("suggested_num_chunks"));
     m.def("kc_batch_exp_internal", &kc_batch_exp_internal<T1, T2, FieldT>);
 }

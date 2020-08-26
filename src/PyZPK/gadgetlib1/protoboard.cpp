@@ -22,8 +22,6 @@ void init_gadgetlib1_protoboard(py::module &m)
         .def("add_r1cs_constraint", &protoboard<FieldT>::add_r1cs_constraint, py::arg("constr"), py::arg("annotation"))
         .def("augment_variable_annotation", &protoboard<FieldT>::augment_variable_annotation, py::arg("pb_variable"), py::arg("postfix"))
         .def("is_satisfied", &protoboard<FieldT>::is_satisfied)
-        // .def("dump_variables", &protoboard<FieldT>::dump_variables)
-        // invalid use of member function
         .def("num_constraints", &protoboard<FieldT>::num_constraints)
         .def("num_inputs", &protoboard<FieldT>::num_inputs)
         .def("num_variables", &protoboard<FieldT>::num_variables)

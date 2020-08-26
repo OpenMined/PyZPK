@@ -15,5 +15,5 @@ void init_zk_proof_systems_ppzksnark_bacs_ppzksnark_run_bacs_ppzksnark(py::modul
     // BACS example (specified by a circuit, primary input, and auxiliary input).
 
     using ppT = default_bacs_ppzksnark_pp;
-    m.def("run_bacs_ppzksnark", &run_bacs_ppzksnark<ppT>);
+    m.def("run_bacs_ppzksnark", &run_bacs_ppzksnark<ppT>, py::arg("example"), py::arg("test_serialization"));
 }

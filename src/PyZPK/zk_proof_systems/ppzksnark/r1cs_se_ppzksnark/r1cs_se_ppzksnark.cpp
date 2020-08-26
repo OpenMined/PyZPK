@@ -37,33 +37,33 @@ void declare_r1cs_se_ppzksnark_proving_key(py::module &m)
         .def(
             "__eq__", [](r1cs_se_ppzksnark_proving_key<ppT> const &self, r1cs_se_ppzksnark_proving_key<ppT> const &other) { return self == other; }, py::is_operator())
         .def("__ostr__", [](r1cs_se_ppzksnark_proving_key<ppT> const &self) {
-        std::ostringstream os;
-        os << self.A_query;
-        os << self.B_query;
-        os << self.C_query_1;
-        os << self.C_query_2;
-        os << self.G_gamma_Z;
-        os << self.H_gamma_Z;
-        os << self.G_ab_gamma_Z;
-        os << self.G_gamma2_Z2;
-        os << self.G_gamma2_Z_t;
-        os << self.constraint_system;
-        return os;
-            })
+            std::ostringstream os;
+            os << self.A_query;
+            os << self.B_query;
+            os << self.C_query_1;
+            os << self.C_query_2;
+            os << self.G_gamma_Z;
+            os << self.H_gamma_Z;
+            os << self.G_ab_gamma_Z;
+            os << self.G_gamma2_Z2;
+            os << self.G_gamma2_Z_t;
+            os << self.constraint_system;
+            return os;
+        })
         .def("__istr__", [](r1cs_se_ppzksnark_proving_key<ppT> &self) {
-                std::istringstream in;
-                in >> self.A_query;
-                in >> self.B_query;
-                in >> self.C_query_1;
-                in >> self.C_query_2;
-                in >> self.G_gamma_Z;
-                in >> self.H_gamma_Z;
-                in >> self.G_ab_gamma_Z;
-                in >> self.G_gamma2_Z2;
-                in >> self.G_gamma2_Z_t;
-                in >> self.constraint_system;
-                return in;
-            });
+            std::istringstream in;
+            in >> self.A_query;
+            in >> self.B_query;
+            in >> self.C_query_1;
+            in >> self.C_query_2;
+            in >> self.G_gamma_Z;
+            in >> self.H_gamma_Z;
+            in >> self.G_ab_gamma_Z;
+            in >> self.G_gamma2_Z2;
+            in >> self.G_gamma2_Z_t;
+            in >> self.constraint_system;
+            return in;
+        });
 }
 
 void declare_r1cs_se_ppzksnark_verification_key(py::module &m)
@@ -74,11 +74,11 @@ void declare_r1cs_se_ppzksnark_verification_key(py::module &m)
     py::class_<r1cs_se_ppzksnark_verification_key<ppT>>(m, "r1cs_se_ppzksnark_verification_key")
         .def(py::init<>())
         .def(py::init<const libff::G2<ppT> &,
-            const libff::G1<ppT> &,
-            const libff::G2<ppT> &,
-            const libff::G1<ppT> &,
-            const libff::G2<ppT> &,
-            libff::G1_vector<ppT> &&>())
+                      const libff::G1<ppT> &,
+                      const libff::G2<ppT> &,
+                      const libff::G1<ppT> &,
+                      const libff::G2<ppT> &,
+                      libff::G1_vector<ppT> &&>())
         .def("G1_size", &r1cs_se_ppzksnark_verification_key<ppT>::G1_size)
         .def("G2_size", &r1cs_se_ppzksnark_verification_key<ppT>::G2_size)
         .def("size_in_bits", &r1cs_se_ppzksnark_verification_key<ppT>::size_in_bits)
@@ -86,31 +86,31 @@ void declare_r1cs_se_ppzksnark_verification_key(py::module &m)
         .def(
             "__eq__", [](r1cs_se_ppzksnark_verification_key<ppT> const &self, r1cs_se_ppzksnark_verification_key<ppT> const &other) { return self == other; }, py::is_operator())
         .def("__ostr__", [](r1cs_se_ppzksnark_verification_key<ppT> const &self) {
-        std::ostringstream os;
-        os << self.H << OUTPUT_NEWLINE;
-        os << self.G_alpha << OUTPUT_NEWLINE;
-        os << self.H_beta << OUTPUT_NEWLINE;
-        os << self.G_gamma << OUTPUT_NEWLINE;
-        os << self.H_gamma << OUTPUT_NEWLINE;
-        os << self.query << OUTPUT_NEWLINE;
-        return os;
-            })
+            std::ostringstream os;
+            os << self.H << OUTPUT_NEWLINE;
+            os << self.G_alpha << OUTPUT_NEWLINE;
+            os << self.H_beta << OUTPUT_NEWLINE;
+            os << self.G_gamma << OUTPUT_NEWLINE;
+            os << self.H_gamma << OUTPUT_NEWLINE;
+            os << self.query << OUTPUT_NEWLINE;
+            return os;
+        })
         .def("__istr__", [](r1cs_se_ppzksnark_verification_key<ppT> &self) {
-                std::istringstream in;
-                in >> self.H;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.G_alpha;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.H_beta;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.G_gamma;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.H_gamma;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.query;
-                libff::consume_OUTPUT_NEWLINE(in);
-                return in;
-            });
+            std::istringstream in;
+            in >> self.H;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.G_alpha;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.H_beta;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.G_gamma;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.H_gamma;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.query;
+            libff::consume_OUTPUT_NEWLINE(in);
+            return in;
+        });
 }
 
 void declare_r1cs_se_ppzksnark_processed_verification_key(py::module &m)
@@ -123,34 +123,34 @@ void declare_r1cs_se_ppzksnark_processed_verification_key(py::module &m)
         .def(
             "__eq__", [](r1cs_se_ppzksnark_processed_verification_key<ppT> const &self, r1cs_se_ppzksnark_processed_verification_key<ppT> const &other) { return self == other; }, py::is_operator())
         .def("__ostr__", [](r1cs_se_ppzksnark_processed_verification_key<ppT> const &self) {
-        std::ostringstream os;
-        os << self.G_alpha << OUTPUT_NEWLINE;
-        os << self.H_beta << OUTPUT_NEWLINE;
-        os << self.G_alpha_H_beta_ml << OUTPUT_NEWLINE;
-        os << self.G_gamma_pc << OUTPUT_NEWLINE;
-        os << self.H_gamma_pc << OUTPUT_NEWLINE;
-        os << self.H_pc << OUTPUT_NEWLINE;
-        os << self.query << OUTPUT_NEWLINE;
-        return os;
-            })
+            std::ostringstream os;
+            os << self.G_alpha << OUTPUT_NEWLINE;
+            os << self.H_beta << OUTPUT_NEWLINE;
+            os << self.G_alpha_H_beta_ml << OUTPUT_NEWLINE;
+            os << self.G_gamma_pc << OUTPUT_NEWLINE;
+            os << self.H_gamma_pc << OUTPUT_NEWLINE;
+            os << self.H_pc << OUTPUT_NEWLINE;
+            os << self.query << OUTPUT_NEWLINE;
+            return os;
+        })
         .def("__istr__", [](r1cs_se_ppzksnark_processed_verification_key<ppT> &self) {
-                std::istringstream in;
-                in >> self.G_alpha;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.H_beta;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.G_alpha_H_beta_ml;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.G_gamma_pc;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.H_gamma_pc;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.H_pc;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.query;
-                libff::consume_OUTPUT_NEWLINE(in);
-                return in;
-            });
+            std::istringstream in;
+            in >> self.G_alpha;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.H_beta;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.G_alpha_H_beta_ml;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.G_gamma_pc;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.H_gamma_pc;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.H_pc;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.query;
+            libff::consume_OUTPUT_NEWLINE(in);
+            return in;
+        });
 }
 
 void declare_r1cs_se_ppzksnark_keypair(py::module &m)
@@ -178,56 +178,49 @@ void declare_r1cs_se_ppzksnark_proof(py::module &m)
         .def(
             "__eq__", [](r1cs_se_ppzksnark_proof<ppT> const &self, r1cs_se_ppzksnark_proof<ppT> const &other) { return self == other; }, py::is_operator())
         .def("__ostr__", [](r1cs_se_ppzksnark_proof<ppT> const &self) {
-        std::ostringstream os;
-        os << self.A << OUTPUT_NEWLINE;
-        os << self.B << OUTPUT_NEWLINE;
-        os << self.C << OUTPUT_NEWLINE;
-        return os;
-            })
+            std::ostringstream os;
+            os << self.A << OUTPUT_NEWLINE;
+            os << self.B << OUTPUT_NEWLINE;
+            os << self.C << OUTPUT_NEWLINE;
+            return os;
+        })
         .def("__istr__", [](r1cs_se_ppzksnark_proof<ppT> &self) {
-                std::istringstream in;
-                in >> self.A;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.B;
-                libff::consume_OUTPUT_NEWLINE(in);
-                in >> self.C;
-                libff::consume_OUTPUT_NEWLINE(in);
-                return in;
-            });
+            std::istringstream in;
+            in >> self.A;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.B;
+            libff::consume_OUTPUT_NEWLINE(in);
+            in >> self.C;
+            libff::consume_OUTPUT_NEWLINE(in);
+            return in;
+        });
 }
 
 void declare_r1cs_se_Main_Algorithms(py::module &m)
 {
     using ppT = default_r1cs_se_ppzksnark_pp;
 
-    // A generator algorithm for the R1CS SEppzkSNARK.
-    m.def("r1cs_se_ppzksnark_generator", &r1cs_se_ppzksnark_generator<ppT>);
+    m.def("r1cs_se_ppzksnark_generator", &r1cs_se_ppzksnark_generator<ppT>, "A generator algorithm for the R1CS SEppzkSNARK.", py::arg("r1cs_se_ppzksnark_constraint_system"));
 
-    // A prover algorithm for the R1CS SEppzkSNARK.
-    m.def("r1cs_se_ppzksnark_prover", &r1cs_se_ppzksnark_prover<ppT>);
+    m.def("r1cs_se_ppzksnark_prover", &r1cs_se_ppzksnark_prover<ppT>, "A prover algorithm for the R1CS SEppzkSNARK.", py::arg("r1cs_se_ppzksnark_proving_key"), py::arg("primary_input"), py::arg("auxiliary_input"));
 
-    // A verifier algorithm for the R1CS SEppzkSNARK that:
-    //(1) accepts a non-processed verification key, and
-    //(2) has weak input consistency.
-    m.def("r1cs_se_ppzksnark_verifier_weak_IC", &r1cs_se_ppzksnark_verifier_weak_IC<ppT>);
+    m.def("r1cs_se_ppzksnark_verifier_weak_IC", &r1cs_se_ppzksnark_verifier_weak_IC<ppT>, R"(A verifier algorithm for the R1CS SEppzkSNARK that:
+    (1) accepts a non-processed verification key, and (2) has weak input consistency.)",
+          py::arg("r1cs_se_ppzksnark_verification_key"), py::arg("primary_input"), py::arg("proof"));
 
-    // A verifier algorithm for the R1CS SEppzkSNARK that:
-    //(1) accepts a non-processed verification key, and
-    //(2) has strong input consistency.
-    m.def("r1cs_se_ppzksnark_verifier_strong_IC", &r1cs_se_ppzksnark_verifier_strong_IC<ppT>);
+    m.def("r1cs_se_ppzksnark_verifier_strong_IC", &r1cs_se_ppzksnark_verifier_strong_IC<ppT>, R"(A verifier algorithm for the R1CS SEppzkSNARK that:
+    (1) accepts a non-processed verification key, and (2) has strong input consistency.)",
+          py::arg("r1cs_se_ppzksnark_verification_key"), py::arg("primary_input"), py::arg("proof"));
 
-    // Convert a (non-processed) verification key into a processed verification key.
-    m.def("r1cs_se_ppzksnark_online_verifier_weak_IC", &r1cs_se_ppzksnark_online_verifier_weak_IC<ppT>);
+    m.def("r1cs_se_ppzksnark_online_verifier_weak_IC", &r1cs_se_ppzksnark_online_verifier_weak_IC<ppT>, "Convert a (non-processed) verification key into a processed verification key.", py::arg("r1cs_se_ppzksnark_processed_verification_key"), py::arg("input"), py::arg("proof"));
 
-    // A verifier algorithm for the R1CS ppzkSNARK that:
-    //(1) accepts a processed verification key, and
-    //(2) has weak input consistency.
-    m.def("r1cs_se_ppzksnark_verifier_process_vk", &r1cs_se_ppzksnark_verifier_process_vk<ppT>);
+    m.def("r1cs_se_ppzksnark_verifier_process_vk", &r1cs_se_ppzksnark_verifier_process_vk<ppT>, R"(A verifier algorithm for the R1CS ppzkSNARK that:
+    (1) accepts a processed verification key, and (2) has weak input consistency.)",
+          py::arg("r1cs_se_ppzksnark_verification_key"));
 
-    // A verifier algorithm for the R1CS ppzkSNARK that:
-    //(1) accepts a processed verification key, and
-    //(2) has strong input consistency.
-    m.def("r1cs_se_ppzksnark_online_verifier_strong_IC", &r1cs_se_ppzksnark_online_verifier_strong_IC<ppT>);
+    m.def("r1cs_se_ppzksnark_online_verifier_strong_IC", &r1cs_se_ppzksnark_online_verifier_strong_IC<ppT>, R"(A verifier algorithm for the R1CS ppzkSNARK that:
+    (1) accepts a processed verification key, and (2) has strong input consistency.)",
+          py::arg("r1cs_se_ppzksnark_processed_verification_key"), py::arg("primary_input"), py::arg("proof"));
 }
 
 void init_zk_proof_systems_ppzksnark_r1cs_se_ppzksnark_r1cs_se_ppzksnark(py::module &m)

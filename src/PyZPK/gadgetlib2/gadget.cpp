@@ -15,13 +15,13 @@ void declare_Gadget(py::module &m)
         .def("init", &Gadget::init)
         .def("generateConstraints", &Gadget::generateConstraints)
         .def("generateWitness", &Gadget::generateWitness)
-        .def("addUnaryConstraint", &Gadget::addUnaryConstraint)
-        .def("addRank1Constraint", &Gadget::addRank1Constraint)
-        .def("enforceBooleanity", &Gadget::enforceBooleanity)
+        .def("addUnaryConstraint", &Gadget::addUnaryConstraint, py::arg("LinearCombination_a"), py::arg("name"))
+        .def("addRank1Constraint", &Gadget::addRank1Constraint, py::arg("LinearCombination_a"), py::arg("LinearCombination_b"), py::arg("LinearCombination_c"), py::arg("name"))
+        .def("enforceBooleanity", &Gadget::enforceBooleanity, py::arg("Variable"))
         .def("fieldType", &Gadget::fieldType)
-        .def("flagIsSet", &Gadget::flagIsSet)
-        .def("val", py::overload_cast<const Variable &>(&Gadget::val))
-        .def("val", py::overload_cast<const LinearCombination &>(&Gadget::val));
+        .def("flagIsSet", &Gadget::flagIsSet, py::arg("FlagVariable"))
+        .def("val", py::overload_cast<const Variable &>(&Gadget::val), py::arg("Variable"))
+        .def("val", py::overload_cast<const LinearCombination &>(&Gadget::val), py::arg("LinearCombination"));
 }
 
 void declare_R1P_Gadget(py::module &m)

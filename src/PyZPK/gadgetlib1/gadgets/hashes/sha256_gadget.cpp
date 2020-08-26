@@ -45,12 +45,12 @@ void declare_sha256_two_to_one_hash_gadget(py::module &m)
                       const block_variable<FieldT> &,
                       const digest_variable<FieldT> &,
                       const std::string &>())
-        .def("generate_r1cs_constraints", &sha256_two_to_one_hash_gadget<FieldT>::generate_r1cs_constraints)
+        .def("generate_r1cs_constraints", &sha256_two_to_one_hash_gadget<FieldT>::generate_r1cs_constraints, py::arg("ensure_output_bitness"))
         .def("generate_r1cs_witness", &sha256_two_to_one_hash_gadget<FieldT>::generate_r1cs_witness)
         .def_static("get_digest_len", &sha256_two_to_one_hash_gadget<FieldT>::get_digest_len)
         .def_static("get_block_len", &sha256_two_to_one_hash_gadget<FieldT>::get_block_len)
-        .def_static("get_hash", &sha256_two_to_one_hash_gadget<FieldT>::get_hash)
-        .def_static("expected_constraints", &sha256_two_to_one_hash_gadget<FieldT>::expected_constraints);
+        .def_static("get_hash", &sha256_two_to_one_hash_gadget<FieldT>::get_hash, py::arg("input"))
+        .def_static("expected_constraints", &sha256_two_to_one_hash_gadget<FieldT>::expected_constraints, py::arg("ensure_output_bitness"));
 }
 
 void init_gadgetlib1_hashes_sha256_gadget(py::module &m)

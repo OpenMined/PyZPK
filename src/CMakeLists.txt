@@ -3,6 +3,8 @@ set(
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/utils/utils.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/data_structures/integer_permutation.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/data_structures/set_commitment.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/data_structures/accumulation_vector.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/data_structures/sparse_vector.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/routing_algorithms/benes_routing_algorithm.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/routing_algorithms/as_waksman_routing_algorithm.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/PyZPK/common/default_types/r1cs_ppzkpcd_pp.cpp"

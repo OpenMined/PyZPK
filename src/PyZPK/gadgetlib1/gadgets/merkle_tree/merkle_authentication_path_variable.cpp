@@ -21,6 +21,6 @@ void init_merkle_authentication_path_variable(py::module &m)
 
         .def_readonly("tree_depth", &merkle_authentication_path_variable<FieldT, HashT>::tree_depth)
         .def("generate_r1cs_constraints", &merkle_authentication_path_variable<FieldT, HashT>::generate_r1cs_constraints)
-        .def("generate_r1cs_witness", &merkle_authentication_path_variable<FieldT, HashT>::generate_r1cs_witness)
-        .def("get_authentication_path", &merkle_authentication_path_variable<FieldT, HashT>::get_authentication_path);
+        .def("generate_r1cs_witness", &merkle_authentication_path_variable<FieldT, HashT>::generate_r1cs_witness, py::arg("address"), py::arg("merkle_authentication_path"))
+        .def("get_authentication_path", &merkle_authentication_path_variable<FieldT, HashT>::get_authentication_path, py::arg("address"));
 }
